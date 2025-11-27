@@ -1,16 +1,20 @@
 // theme.js
 const theme = {
     colors: {
-      background: '#0a192f',       // Dark navy
-      text: '#ccd6f6',             // Light blue/gray for readability
-      accent: '#64ffda',           // Bright teal accent
-      hover: '#52e3c2',            // Slightly darker teal for hovers
-      border: '#112240',           // Darker blue for borders
-      shadow: '#020c1b',           // Shadow color
+      background: '#0f0f23',       // Deep dark blue-black
+      backgroundSecondary: '#1a1a2e', // Slightly lighter for cards
+      text: '#e4e4e7',             // Soft white for readability
+      textSecondary: '#a1a1aa',    // Muted text
+      accent: '#8b5cf6',           // Modern purple accent
+      accentHover: '#7c3aed',      // Darker purple for hovers
+      border: '#27272a',           // Subtle borders
+      shadow: '#000000',           // Deep shadow
       // For mobile menus and overlays
-      mobileMenuBg: 'rgba(17, 34, 64, 0.95)',
-      mobileMenuText: '#ccd6f6',
-      overlay: 'rgba(0, 0, 0, 0.5)',
+      mobileMenuBg: 'rgba(15, 15, 35, 0.98)',
+      mobileMenuText: '#e4e4e7',
+      overlay: 'rgba(0, 0, 0, 0.75)',
+      cardBg: '#1a1a2e',
+      cardHover: '#252538',
     },
     fontSizes: {
       xs: '0.8rem',
@@ -25,9 +29,10 @@ const theme = {
       hover: 'color 0.2s ease-in-out, background 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
     },
     shadows: {
-      card: '0 4px 20px rgba(0, 0, 0, 0.25)',
-      hover: '0 8px 30px rgba(100, 255, 218, 0.4)',
-      header: '0 2px 10px rgba(0,0,0,0.2)',
+      card: '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
+      hover: '0 10px 15px -3px rgba(139, 92, 246, 0.3), 0 4px 6px -2px rgba(139, 92, 246, 0.2)',
+      header: '0 1px 3px rgba(0, 0, 0, 0.4)',
+      modal: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
     },
     animations: {
       fadeIn: 'fadeIn 0.8s ease-out forwards',

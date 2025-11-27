@@ -66,22 +66,9 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
   }
 
-  /* Buttons with gradient backgrounds and hover effects */
+  /* Buttons - styled in components, but base reset */
   button {
-    background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent}, ${({ theme }) => theme.colors.hover});
-    color: ${({ theme }) => theme.colors.background};
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: ${({ theme }) => theme.shadows.card};
-    transition: transform var(--transition-speed) var(--easing), box-shadow var(--transition-speed) var(--easing);
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  button:hover {
-    transform: translateY(-3px);
-    box-shadow: ${({ theme }) => theme.shadows.hover};
+    font-family: inherit;
   }
 
   /* Headings with text-shadow and letter-spacing */
