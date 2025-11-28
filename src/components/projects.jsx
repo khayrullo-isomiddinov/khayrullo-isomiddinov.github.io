@@ -381,8 +381,43 @@ const myProjects = [
   }
 ];
 
+const MinorToggleButton = styled.button`
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.accent};
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin: 2rem auto 0;
+  display: block;
+  width: fit-content;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.background};
+  }
+`;
+
+
+const minorProjects = [
+  {
+    id: 101,
+    title: "Knights Game",
+    description: "A Java Swing application implementing a “Knight Tournament” strategy game on an NxN grid. Two white and two black knights move in legal chess knight patterns, painting tiles with their color. The goal is to form four connected painted tiles in a line. Includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive board controls.",
+    longDescription: "A Java Swing application implementing a “Knight Tournament” strategy game on an NxN grid. Two white and two black knights move in legal chess knight patterns, painting tiles with their color. The goal is to form four connected painted tiles in a line. Includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive board controls.",
+    repoLink: "https://github.com/khayrullo-isomiddinov",
+    liveLink: "#",
+    techStack: ["Java OOP", "Swing GUI programming", "Event-driven design", "State management"],
+    imageUrl: new URL('../assets/images/java.png', import.meta.url).href,
+  },
+];
+
+
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [showMinor, setShowMinor] = useState(false);
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -455,7 +490,7 @@ const Projects = () => {
           Here are some of my recent projects. Click on any project to learn more.
         </SectionSubtitle>
         <Divider />
-        
+
         <ProjectsGrid
           variants={containerVariants}
           initial="hidden"
@@ -472,7 +507,7 @@ const Projects = () => {
               whileTap={{ scale: 0.98 }}
             >
               <ProjectImage imageUrl={project.imageUrl}>
-               
+
               </ProjectImage>
               <ProjectContent>
                 <ProjectTitle>{project.title}</ProjectTitle>
@@ -490,6 +525,48 @@ const Projects = () => {
             </ProjectCard>
           ))}
         </ProjectsGrid>
+        <MinorToggleButton onClick={() => setShowMinor(!showMinor)}>
+          {showMinor ? "Hide Minor Projects" : "View Minor Projects"}
+        </MinorToggleButton>
+
+        {showMinor && (
+          <ProjectsGrid
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            style={{ marginTop: "2rem" }}
+          >
+            {minorProjects.map((project) => (
+              <ProjectCard
+                key={project.id}
+                variants={cardVariants}
+                onClick={() => openModal(project)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <ProjectImage imageUrl={project.imageUrl} />
+                <ProjectContent>
+                  <ProjectTitle>{project.title}</ProjectTitle>
+                  <ProjectDescription>{project.description}</ProjectDescription>
+
+                  <TechStack>
+                    {project.techStack.slice(0, 3).map((tech, idx) => (
+                      <TechTag key={idx}>{tech}</TechTag>
+                    ))}
+                    {project.techStack.length > 3 && (
+                      <TechTag>+{project.techStack.length - 3} more</TechTag>
+                    )}
+                  </TechStack>
+
+                  <ViewMoreButton>View Details</ViewMoreButton>
+                </ProjectContent>
+              </ProjectCard>
+            ))}
+          </ProjectsGrid>
+        )}
+
+
       </Container>
 
       <AnimatePresence>
@@ -510,15 +587,15 @@ const Projects = () => {
               <ModalCloseButton onClick={closeModal}>
                 <FiX size={20} />
               </ModalCloseButton>
-              
+
               <ModalImage imageUrl={selectedProject.imageUrl}>
 
               </ModalImage>
-              
+
               <ModalBody>
                 <ModalTitle>{selectedProject.title}</ModalTitle>
                 <ModalDescription>{selectedProject.longDescription}</ModalDescription>
-                
+
                 <ModalTechStack>
                   <ModalTechTitle>Technologies Used</ModalTechTitle>
                   <TechStack>
