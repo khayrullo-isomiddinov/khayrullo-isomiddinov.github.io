@@ -132,7 +132,7 @@ const Footer = () => {
 
       <RightSection>
         <CVButton
-          href="/resume.pdf"
+          href="/CV.pdf"
           download="HarryResume.pdf"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.96 }}
