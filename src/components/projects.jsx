@@ -1,128 +1,118 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiGithub, FiExternalLink, FiX } from 'react-icons/fi';
+import { FiGithub, FiExternalLink, FiX, FiChevronDown } from 'react-icons/fi';
 
-const ProjectsSection = styled.section`
-  padding: 3rem 2rem;
-  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
-  color: ${({ theme }) => theme.colors.text};
-  min-height: 100vh;
+// ── Layout ───────────────────────────────────────────────────────────────────
+
+const Section = styled.section`
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 const Container = styled.div`
-  max-width: 1200px;
-  margin: 2rem auto 0;
+  max-width: 1100px;
+  margin: 0 auto;
+`;
+
+const SectionHeader = styled.div`
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+`;
+
+const SectionLabel = styled.p`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
+  margin-bottom: 0.8rem;
 `;
 
 const SectionTitle = styled(motion.h2)`
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: ${({ theme }) => theme.colors.text};
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-  }
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
 `;
 
-const SectionSubtitle = styled(motion.p)`
-  text-align: center;
+const SectionSub = styled(motion.p)`
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
   color: ${({ theme }) => theme.colors.textSecondary};
-  font-size: 1.1rem;
-  margin-bottom: 4rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 480px;
 `;
 
-const Divider = styled.div`
-  height: 2px;
-  background: linear-gradient(90deg, transparent, ${({ theme }) => theme.colors.accent}, transparent);
-  width: 100px;
-  margin: 1rem auto 3rem;
-`;
+// ── Grid & Cards ─────────────────────────────────────────────────────────────
 
-const ProjectsGrid = styled(motion.div)`
+const Grid = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 1.5rem;
 
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  @media (min-width: 640px)  { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
 `;
+
 const ProjectCard = styled(motion.div)`
-  background: linear-gradient(145deg, #1a1a1f, #121216);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.28s ease;
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.35),
-    0 16px 40px rgba(0,0,0,0.45);
+  transition: border-color 0.25s ease, transform 0.22s ease, box-shadow 0.22s ease;
 
   &:hover {
-    transform: translateY(-12px) scale(1.03);
-    border-color: ${({ theme }) => theme.colors.accent};
-    box-shadow:
-      0 12px 28px rgba(0,0,0,0.45),
-      0 22px 50px rgba(0,0,0,0.55);
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
   }
 `;
-const ProjectImage = styled.div`
+
+const CardImage = styled.div`
   width: 100%;
-  height: 220px;
+  height: 200px;
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: ${({ theme }) => theme.colors.surface};
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
-    background: url('${props => props.imageUrl || ''}') center/cover;
-    opacity: 1;
-    transition: transform 0.4s ease;
+    background: url('${({ imageUrl }) => imageUrl}') center / cover no-repeat;
+    transition: transform 0.5s ease;
   }
 
-  /* smooth zoom on hover */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 55%,
+      ${({ theme }) => theme.colors.background}88 100%
+    );
+  }
+
   ${ProjectCard}:hover &::before {
-    transform: scale(1.08);
+    transform: scale(1.06);
   }
 `;
 
-
-const ProjectIcon = styled.div`
-  font-size: 3rem;
-  color: ${({ theme }) => theme.colors.accent};
-  opacity: 0.5;
+const CardBody = styled.div`
+  padding: 1.4rem 1.5rem 1.6rem;
 `;
 
-const ProjectContent = styled.div`
-  padding: 1.5rem;
-`;
-
-const ProjectTitle = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+const CardTitle = styled.h3`
+  font-size: 1.05rem;
+  font-weight: 700;
   color: ${({ theme }) => theme.colors.text};
+  margin-bottom: 0.5rem;
 `;
 
-const ProjectDescription = styled.p`
+const CardDesc = styled.p`
+  font-size: 0.85rem;
+  line-height: 1.65;
   color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.6;
   margin-bottom: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -130,62 +120,66 @@ const ProjectDescription = styled.p`
   overflow: hidden;
 `;
 
-const TechStack = styled.div`
+const TagRow = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
 `;
 
-const TechTag = styled.span`
-  font-size: 0.85rem;
-  padding: 0.25rem 0.75rem;
-  background: ${({ theme }) => theme.colors.accent}15;
+const Tag = styled.span`
+  font-size: 0.75rem;
+  padding: 0.22rem 0.6rem;
+  background: ${({ theme }) => theme.colors.accentDim};
   color: ${({ theme }) => theme.colors.accent};
+  border: 1px solid rgba(139, 92, 246, 0.18);
   border-radius: 4px;
-  border: 1px solid ${({ theme }) => theme.colors.accent}30;
 `;
 
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+const DetailsBtn = styled.button`
+  width: 100%;
+  padding: 0.65rem;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accent};
+    background: ${({ theme }) => theme.colors.accentDim};
+  }
 `;
 
-const LinkButton = styled.a`
+// ── Minor Projects Toggle ─────────────────────────────────────────────────────
+
+const ToggleBtn = styled.button`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
-const ViewMoreButton = styled.button`
-  width: 100%;
-  padding: 0.75rem;
+  gap: 0.45rem;
+  margin: 2.5rem auto 0;
+  padding: 0.65rem 1.4rem;
   background: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.accent};
-  border-radius: 6px;
-  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  border-radius: 8px;
+  font-size: 0.88rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  margin-top: 0.5rem;
+  transition: all 0.25s ease;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
+    border-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accent};
+    background: ${({ theme }) => theme.colors.accentDim};
   }
 `;
 
-// Modal Styles
-const ModalOverlay = styled(motion.div)`
+// ── Modal ─────────────────────────────────────────────────────────────────────
+
+const Overlay = styled(motion.div)`
   position: fixed;
   inset: 0;
   background: ${({ theme }) => theme.colors.overlay};
@@ -193,15 +187,15 @@ const ModalOverlay = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  backdrop-filter: blur(4px);
+  padding: 2rem 1.5rem;
+  backdrop-filter: blur(6px);
 `;
 
-const ModalContent = styled(motion.div)`
-  background: ${({ theme }) => theme.colors.cardBg};
+const ModalCard = styled(motion.div)`
+  background: ${({ theme }) => theme.colors.surface};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 16px;
-  max-width: 900px;
+  max-width: 860px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
@@ -209,430 +203,384 @@ const ModalContent = styled(motion.div)`
   box-shadow: ${({ theme }) => theme.shadows.modal};
 `;
 
-const ModalCloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: ${({ theme }) => theme.colors.cardBg};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  color: ${({ theme }) => theme.colors.text};
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
-    border-color: ${({ theme }) => theme.colors.accent};
-  }
-`;
-
-const ModalImage = styled.div`
+const ModalImageWrapper = styled.div`
   width: 100%;
-  height: 300px;
-  background: null;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 260px;
   position: relative;
   overflow: hidden;
+  background: ${({ theme }) => theme.colors.background};
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('${props => props.imageUrl || ''}') center/cover;
-    opacity: ${props => props.imageUrl ? 0.4 : 0};
+    background: url('${({ imageUrl }) => imageUrl}') center / cover no-repeat;
+    opacity: 0.45;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, ${({ theme }) => theme.colors.surface} 100%);
+  }
+`;
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.text};
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.accent};
   }
 `;
 
 const ModalBody = styled.div`
-  padding: 2rem;
+  padding: 2rem 2rem 2.5rem;
 `;
 
 const ModalTitle = styled.h2`
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
-  color: ${({ theme }) => theme.colors.text};
 `;
 
-const ModalDescription = styled.p`
-  color: ${({ theme }) => theme.colors.textSecondary};
+const ModalDesc = styled.p`
+  font-size: 1rem;
   line-height: 1.8;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 1.75rem;
 `;
 
-const ModalTechStack = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const ModalTechTitle = styled.h3`
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: ${({ theme }) => theme.colors.text};
+const ModalTechTitle = styled.p`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
+  margin-bottom: 0.75rem;
 `;
 
 const ModalLinks = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 `;
 
-const ModalLinkButton = styled.a`
-  display: flex;
+const PrimaryLink = styled.a`
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.45rem;
+  padding: 0.75rem 1.4rem;
   background: ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.background};
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
 
   &:hover {
     background: ${({ theme }) => theme.colors.accentHover};
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35);
   }
 `;
 
-const SecondaryLinkButton = styled(ModalLinkButton)`
+const SecondaryLink = styled(PrimaryLink)`
   background: transparent;
-  border: 2px solid ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors.text};
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
+    background: ${({ theme }) => theme.colors.accentDim};
+    border-color: ${({ theme }) => theme.colors.accent};
+    color: ${({ theme }) => theme.colors.accent};
+    box-shadow: none;
   }
 `;
+
+// ── Data ─────────────────────────────────────────────────────────────────────
 
 const myProjects = [
   {
     id: 1,
     title: 'PeerPrep',
-    description: 'PeerPrep is a full-stack study-group platform built with FastAPI on the backend and React on the frontend. It lets users create and join study events, chat in real time, and improve their event descriptions and cover images with integrated AI. The system uses WebSockets for messaging and applies vector clock synchronization to keep messages in causal order across clients. It includes JWT authentication with Argon2 hashing, an XP and streak-based gamification engine, and a responsive interface built with TailwindCSS. Performance is improved with caching, lazy loading, optimistic updates, and GZip compression. The backend uses SQLModel with a normalized SQLite schema and follows a modular service-based architecture. The project demonstrates skills in backend engineering with FastAPI, frontend development with React, real-time communication, distributed system concepts, OpenAI API integration, authentication and security, API design, caching strategies, and production-grade error handling.',
-    longDescription: 'PeerPrep is a full-stack study-group platform built with FastAPI on the backend and React on the frontend. It lets users create and join study events, chat in real time, and improve their event descriptions and cover images with integrated AI. The system uses WebSockets for messaging and applies vector clock synchronization to keep messages in causal order across clients. It includes JWT authentication with Argon2 hashing, an XP and streak-based gamification engine, and a responsive interface built with TailwindCSS. Performance is improved with caching, lazy loading, optimistic updates, and GZip compression. The backend uses SQLModel with a normalized SQLite schema and follows a modular service-based architecture. The project demonstrates skills in backend engineering with FastAPI, frontend development with React, real-time communication, distributed system concepts, OpenAI API integration, authentication and security, API design, caching strategies, and production-grade error handling.',
+    description:
+      'A real-time study-group platform with WebSocket chat, vector-clock message synchronisation, AI-assisted event descriptions, and a gamification engine built on FastAPI and React.',
+    longDescription:
+      'PeerPrep is a full-stack study-group platform built with FastAPI and React. Users create and join study events, chat in real time, and enhance their posts with AI-generated descriptions and cover images. The chat system uses WebSockets with a vector-clock algorithm to maintain causal message ordering across clients. The backend includes JWT authentication with Argon2 hashing, an XP and streak-based gamification engine, caching, lazy loading, optimistic updates, and GZip compression. The data layer uses SQLModel on top of SQLite with a normalised schema and modular service architecture.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/PeerPrep',
     liveLink: 'https://github.com/khayrullo-isomiddinov/PeerPrep',
-    techStack: ['FastAPI', 'SQLModel', 'SQLite', 'WebSockets', 'JWT Auth', 'React 19', 'WebSockets with vector-clock synchronization', 'OpenAI API', 'CORS rules'],
+    techStack: ['FastAPI', 'SQLModel', 'SQLite', 'WebSockets', 'React 19', 'JWT Auth', 'OpenAI API', 'Vector Clocks'],
     imageUrl: new URL('../assets/images/peerprep.png', import.meta.url).href,
-
   },
   {
     id: 2,
     title: 'Polaris LMS',
-    description: 'Learning Management System (LMS) is a full-stack web application built with Laravel that handles course and assignment management for teachers and students. Teachers can create subjects, add assignments with deadlines and point values, and grade student submissions with feedback. Students can enroll in subjects, view assignments, and submit their work. The system includes authentication, profile management, and role-based dashboards. The interface is responsive and styled with Tailwind CSS. It uses Laravel 12, PHP 8.2+, Laravel Breeze, SQLite, Blade, and Tailwind. The project demonstrates full-stack PHP development, database modeling with Eloquent ORM, REST routing, role-based access control, form validation, and secure authentication.',
-    longDescription: 'Learning Management System (LMS) is a full-stack web application built with Laravel that handles course and assignment management for teachers and students. Teachers can create subjects, add assignments with deadlines and point values, and grade student submissions with feedback. Students can enroll in subjects, view assignments, and submit their work. The system includes authentication, profile management, and role-based dashboards. The project demonstrates full-stack PHP development, database modeling with Eloquent ORM, REST routing, role-based access control, form validation, and secure authentication.',
+    description:
+      'A full-stack learning management system for teachers and students — assignment management, grading, role-based dashboards, and secure authentication built on Laravel.',
+    longDescription:
+      'Polaris is a full-stack Learning Management System built with Laravel. Teachers create subjects and assignments with deadlines and point values, then grade student submissions with written feedback. Students enrol in subjects, view all assignments, and submit their work. The system includes role-based dashboards, authentication via Laravel Breeze, profile management, and a clean responsive interface styled with Tailwind CSS. It demonstrates full-stack PHP development, Eloquent ORM, RESTful routing, RBAC, form validation, and secure auth.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/polarisLMS',
     liveLink: 'https://github.com/khayrullo-isomiddinov/polarisLMS',
-    techStack: ['Laravel 12', 'PHP 8', 'Blade Template', 'SQLite', 'MVC Architecture', 'Composer'],
+    techStack: ['Laravel 12', 'PHP 8', 'Blade', 'SQLite', 'Tailwind CSS', 'MVC'],
     imageUrl: new URL('../assets/images/polaris.png', import.meta.url).href,
   },
   {
     id: 3,
-    title: 'Booklovers-Hub',
-    description: 'Booklovers-Hub is a web application built with Laravel and Blade templating that offers a social platform for readers. Users can create accounts, follow or unfollow other users, share books, leave reviews, and build their own virtual book collections. The system supports user profiles, book records, reviews, social connections, and book sharing — enabling a community-driven reading experience. Built with PHP and Laravel, it uses relational database architecture, secure authentication and authorization, and a responsive UI for smooth user interaction. The project demonstrates full-stack web development, database modeling, user-management logic, social-feature implementation, and skill with Laravel ecosystem.',
-    longDescription: 'Booklovers-Hub is a web application built with Laravel and Blade templating that offers a social platform for readers. Users can create accounts, follow or unfollow other users, share books, leave reviews, and build their own virtual book collections. The system supports user profiles, book records, reviews, social connections, and book sharing — enabling a community-driven reading experience. Built with PHP and Laravel, it uses relational database architecture, secure authentication and authorization, and a responsive UI for smooth user interaction. The project demonstrates full-stack web development, database modeling, user-management logic, social-feature implementation, and skill with Laravel ecosystem.',
+    title: 'Booklovers Hub',
+    description:
+      'A social reading platform where users follow each other, share books, leave reviews, and build virtual collections — built with Laravel and a relational database.',
+    longDescription:
+      'Booklovers Hub is a community-driven reading platform built with Laravel. Users create accounts, follow or unfollow other readers, share books, write reviews, and build personal collections. The system supports full user profiles, book records, social connections, and a shared feed. The project demonstrates relational database design, user-management logic, social-feature implementation, secure authentication, and the Laravel ecosystem.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
     liveLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
-    techStack: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
+    techStack: ['PHP', 'MySQL', 'Laravel', 'Blade', 'JavaScript'],
     imageUrl: new URL('../assets/images/books.jpeg', import.meta.url).href,
   },
   {
     id: 4,
     title: 'Stargate Game',
-    description: 'An engaging, multiplayer grid-based game designed to enhance my web development skills, where players embark on a strategic quest to locate and collect scattered debris fragments.',
-    longDescription: 'Stargate Game is a multiplayer web-based game that combines strategy and exploration. Players navigate through a grid-based world, searching for debris fragments while competing with other players. The game features real-time multiplayer functionality, dynamic game mechanics, and an engaging user interface. Built to showcase advanced web development skills, this project demonstrates proficiency in frontend frameworks, real-time communication, and game development principles.',
+    description:
+      'A multiplayer grid-based strategy game where players navigate the board and collect scattered debris fragments, built with vanilla web technologies.',
+    longDescription:
+      'Stargate is a browser-based multiplayer grid game. Players navigate a shared board and compete to collect debris fragments. The game features real-time multiplayer functionality, turn-based mechanics, and a responsive game interface. It is deployed live and demonstrates proficiency in vanilla JavaScript, DOM manipulation, and game state management.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/Stargate-Game',
-    liveLink: 'https://6797fbbf6daef38935426e97--gentle-frangollo-fbc645.netlify.app/',
-    techStack: ['HTML', ' CSS', 'JavaScript'],
-    imageUrl: new URL('../assets/images/gate.jpeg', import.meta.url).href,
+    liveLink: 'https://khayrullo.com/Stargate-Game/',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+    imageUrl: new URL('../assets/images/gate.png', import.meta.url).href,
   },
   {
     id: 5,
     title: 'Comment Remover',
-    description: 'A VSCode extension to remove comments. Supports JavaScript, TypeScript, Python, C, C++, PHP, and Java. Streamline your code cleanup process with this powerful developer tool.',
-    longDescription: 'Comment Remover is a Visual Studio Code extension designed to help developers quickly clean up their code by removing comments. The extension supports multiple programming languages including JavaScript, TypeScript, Python, C, C++, PHP, and Java. It features intelligent comment detection, batch processing capabilities, and customizable options for different comment styles. This tool has been downloaded by thousands of developers and has received positive feedback for its reliability and ease of use.',
+    description:
+      'A published VSCode extension that strips comments from source files across seven languages — JavaScript, TypeScript, Python, C, C++, PHP, and Java.',
+    longDescription:
+      'Comment Remover is a Visual Studio Code extension that helps developers quickly clean up source files by removing all comments. It supports JavaScript, TypeScript, Python, C, C++, PHP, and Java with intelligent language-aware comment detection. The extension has been downloaded thousands of times and is available on the VS Code Marketplace. It demonstrates TypeScript development, the VS Code extension API, and publishing to a production marketplace.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/comment-remover-vscode-ext',
-    liveLink: 'https://marketplace.visualstudio.com/items?itemName=KhayrulloIsomiddinov.khayrullo-comment-remover&ssr=false#review-details',
-    techStack: ['TypeScript', 'VSCode API', 'Node.js'],
+    liveLink: 'https://marketplace.visualstudio.com/items?itemName=KhayrulloIsomiddinov.khayrullo-comment-remover',
+    techStack: ['TypeScript', 'VS Code API', 'Node.js'],
     imageUrl: new URL('../assets/images/vscode.png', import.meta.url).href,
   },
   {
     id: 6,
-    title: 'MoodLens: AI Therapist',
-    description: 'MoodLens is an AI-powered augmented reality (AR) application designed to analyze emotional states and enhance well-being. Using facial recognition, voice analysis, and interactive AR therapy, MoodLens provides real-time insights and tools for emotional balance.',
-    longDescription: 'MoodLens is an AI-powered augmented reality (AR) application designed to analyze emotional states and enhance well-being. Using facial recognition, voice analysis, and interactive AR therapy, MoodLens provides real-time insights and tools for emotional balance.',
+    title: 'MoodLens',
+    description:
+      'An AI-powered augmented reality application that analyses emotional states in real time using facial recognition and voice analysis, providing interactive well-being tools.',
+    longDescription:
+      'MoodLens is an AI-powered AR application designed to analyse emotional states and support well-being. It combines facial recognition, voice analysis, and interactive AR therapy to provide real-time emotional insights. Built with React and Node.js, it demonstrates integration of machine-learning APIs, real-time media processing, and an interactive frontend UI.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/mood-lens',
     liveLink: 'https://khayrullo-isomiddinov.github.io/mood-lens/',
-    techStack: ['React', 'Node.js'],
+    techStack: ['React', 'Node.js', 'AI / ML APIs'],
     imageUrl: new URL('../assets/images/moodlens.png', import.meta.url).href,
-  }
+  },
 ];
-
-const MinorToggleButton = styled.button`
-  padding: 0.6rem 1.2rem;
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.accent};
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  margin: 2rem auto 0;
-  display: block;
-  width: fit-content;
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
-  }
-`;
-
 
 const minorProjects = [
   {
     id: 101,
-    title: "Knights Game",
-    description: "A Java Swing application implementing a “Knight Tournament” strategy game on an NxN grid. Two white and two black knights move in legal chess knight patterns, painting tiles with their color. The goal is to form four connected painted tiles in a line. Includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive board controls.",
-    longDescription: "A Java Swing application implementing a “Knight Tournament” strategy game on an NxN grid. Two white and two black knights move in legal chess knight patterns, painting tiles with their color. The goal is to form four connected painted tiles in a line. Includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive board controls.",
-    repoLink: "https://github.com/khayrullo-isomiddinov",
-    liveLink: "#",
-    techStack: ["Java OOP", "Swing GUI programming", "Event-driven design", "State management"],
+    title: 'Knights Game',
+    description:
+      'A Java Swing strategy game on an NxN grid where two white and two black knights paint tiles with their colour. The first player to form four connected tiles in a line wins.',
+    longDescription:
+      'Knights Game is a Java Swing application implementing a turn-based "Knight Tournament" strategy game. Two white and two black knights move in legal chess-knight patterns, painting tiles with their colour. The goal is to form four connected painted tiles in a line. The project includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive controls. It demonstrates object-oriented Java, Swing GUI programming, event-driven design, and game state management.',
+    repoLink: 'https://github.com/khayrullo-isomiddinov',
+    liveLink: '#',
+    techStack: ['Java', 'Swing', 'OOP', 'Event-Driven Design'],
     imageUrl: new URL('../assets/images/java.png', import.meta.url).href,
   },
 ];
 
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+const fadeUp = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+const stagger = {
+  hidden:  { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+};
+
+const modalVar = {
+  hidden:  { opacity: 0, scale: 0.93, y: 20 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: [0.25, 0.1, 0.25, 1] } },
+  exit:    { opacity: 0, scale: 0.93, y: 20, transition: { duration: 0.2 } },
+};
+
+// ── Component ─────────────────────────────────────────────────────────────────
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selected, setSelected] = useState(null);
   const [showMinor, setShowMinor] = useState(false);
 
-  const openModal = (project) => {
-    setSelectedProject(project);
+  const open = (project) => {
+    setSelected(project);
     document.body.style.overflow = 'hidden';
   };
 
-  const closeModal = () => {
-    setSelectedProject(null);
-    document.body.style.overflow = 'unset';
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-  };
-
-  const modalVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99],
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.9,
-      transition: {
-        duration: 0.2,
-      },
-    },
+  const close = () => {
+    setSelected(null);
+    document.body.style.overflow = '';
   };
 
   return (
-    <ProjectsSection id="projects">
+    <Section id="projects">
       <Container>
-        <SectionTitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Featured Projects
-        </SectionTitle>
-        <SectionSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Here are some of my recent projects. Click on any project to learn more.
-        </SectionSubtitle>
-        <Divider />
+        <SectionHeader>
+          <SectionLabel>Projects</SectionLabel>
+          <SectionTitle
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+          >
+            Things I've Built
+          </SectionTitle>
+          <SectionSub
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.1 }}
+          >
+            Click any card for the full story.
+          </SectionSub>
+        </SectionHeader>
 
-        <ProjectsGrid
-          variants={containerVariants}
+        <Grid
+          variants={stagger}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "0px" }}
-
+          viewport={{ once: true, margin: '-60px' }}
         >
-          {myProjects.map((project) => (
+          {myProjects.map(project => (
             <ProjectCard
               key={project.id}
-              variants={cardVariants}
-              onClick={() => openModal(project)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              variants={fadeUp}
+              onClick={() => open(project)}
+              whileTap={{ scale: 0.99 }}
             >
-              <ProjectImage imageUrl={project.imageUrl}>
-
-              </ProjectImage>
-              <ProjectContent>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectDescription>{project.description}</ProjectDescription>
-                <TechStack>
-                  {project.techStack.slice(0, 3).map((tech, idx) => (
-                    <TechTag key={idx}>{tech}</TechTag>
-                  ))}
+              <CardImage imageUrl={project.imageUrl} />
+              <CardBody>
+                <CardTitle>{project.title}</CardTitle>
+                <CardDesc>{project.description}</CardDesc>
+                <TagRow>
+                  {project.techStack.slice(0, 3).map(t => <Tag key={t}>{t}</Tag>)}
                   {project.techStack.length > 3 && (
-                    <TechTag>+{project.techStack.length - 3} more</TechTag>
+                    <Tag>+{project.techStack.length - 3}</Tag>
                   )}
-                </TechStack>
-                <ViewMoreButton>View Details</ViewMoreButton>
-              </ProjectContent>
+                </TagRow>
+                <DetailsBtn>View Details</DetailsBtn>
+              </CardBody>
             </ProjectCard>
           ))}
-        </ProjectsGrid>
-        <MinorToggleButton onClick={() => setShowMinor(!showMinor)}>
-          {showMinor ? "Hide Minor Projects" : "View Minor Projects"}
-        </MinorToggleButton>
+        </Grid>
+
+        <ToggleBtn onClick={() => setShowMinor(v => !v)}>
+          {showMinor ? 'Hide Minor Projects' : 'View Minor Projects'}
+          <FiChevronDown
+            size={15}
+            style={{ transform: showMinor ? 'rotate(180deg)' : 'none', transition: 'transform 0.25s ease' }}
+          />
+        </ToggleBtn>
 
         {showMinor && (
-          <ProjectsGrid
-            variants={containerVariants}
+          <Grid
+            variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            style={{ marginTop: "2rem" }}
+            style={{ marginTop: '2rem' }}
           >
-            {minorProjects.map((project) => (
+            {minorProjects.map(project => (
               <ProjectCard
                 key={project.id}
-                variants={cardVariants}
-                onClick={() => openModal(project)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                variants={fadeUp}
+                onClick={() => open(project)}
+                whileTap={{ scale: 0.99 }}
               >
-                <ProjectImage imageUrl={project.imageUrl} />
-                <ProjectContent>
-                  <ProjectTitle>{project.title}</ProjectTitle>
-                  <ProjectDescription>{project.description}</ProjectDescription>
-
-                  <TechStack>
-                    {project.techStack.slice(0, 3).map((tech, idx) => (
-                      <TechTag key={idx}>{tech}</TechTag>
-                    ))}
-                    {project.techStack.length > 3 && (
-                      <TechTag>+{project.techStack.length - 3} more</TechTag>
-                    )}
-                  </TechStack>
-
-                  <ViewMoreButton>View Details</ViewMoreButton>
-                </ProjectContent>
+                <CardImage imageUrl={project.imageUrl} />
+                <CardBody>
+                  <CardTitle>{project.title}</CardTitle>
+                  <CardDesc>{project.description}</CardDesc>
+                  <TagRow>
+                    {project.techStack.slice(0, 3).map(t => <Tag key={t}>{t}</Tag>)}
+                    {project.techStack.length > 3 && <Tag>+{project.techStack.length - 3}</Tag>}
+                  </TagRow>
+                  <DetailsBtn>View Details</DetailsBtn>
+                </CardBody>
               </ProjectCard>
             ))}
-          </ProjectsGrid>
+          </Grid>
         )}
-
-
       </Container>
 
+      {/* Modal */}
       <AnimatePresence>
-        {selectedProject && (
-          <ModalOverlay
+        {selected && (
+          <Overlay
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={closeModal}
+            onClick={close}
           >
-            <ModalContent
-              variants={modalVariants}
+            <ModalCard
+              variants={modalVar}
               initial="hidden"
               animate="visible"
               exit="exit"
-              onClick={(e) => e.stopPropagation()}
+              onClick={e => e.stopPropagation()}
             >
-              <ModalCloseButton onClick={closeModal}>
-                <FiX size={20} />
-              </ModalCloseButton>
+              <CloseBtn onClick={close} aria-label="Close">
+                <FiX size={18} />
+              </CloseBtn>
 
-              <ModalImage imageUrl={selectedProject.imageUrl}>
-
-              </ModalImage>
+              <ModalImageWrapper imageUrl={selected.imageUrl} />
 
               <ModalBody>
-                <ModalTitle>{selectedProject.title}</ModalTitle>
-                <ModalDescription>{selectedProject.longDescription}</ModalDescription>
+                <ModalTitle>{selected.title}</ModalTitle>
+                <ModalDesc>{selected.longDescription}</ModalDesc>
 
-                <ModalTechStack>
-                  <ModalTechTitle>Technologies Used</ModalTechTitle>
-                  <TechStack>
-                    {selectedProject.techStack.map((tech, idx) => (
-                      <TechTag key={idx}>{tech}</TechTag>
-                    ))}
-                  </TechStack>
-                </ModalTechStack>
+                <ModalTechTitle>Technologies</ModalTechTitle>
+                <TagRow>
+                  {selected.techStack.map(t => <Tag key={t}>{t}</Tag>)}
+                </TagRow>
 
                 <ModalLinks>
-                  {selectedProject.liveLink && (
-                    <ModalLinkButton
-                      href={selectedProject.liveLink}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <FiExternalLink size={18} />
-                      View Live
-                    </ModalLinkButton>
+                  {selected.liveLink && selected.liveLink !== '#' && (
+                    <PrimaryLink href={selected.liveLink} target="_blank" rel="noreferrer">
+                      <FiExternalLink size={16} /> View Live
+                    </PrimaryLink>
                   )}
-                  {selectedProject.repoLink && (
-                    <SecondaryLinkButton
-                      href={selectedProject.repoLink}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <FiGithub size={18} />
-                      View Code
-                    </SecondaryLinkButton>
+                  {selected.repoLink && (
+                    <SecondaryLink href={selected.repoLink} target="_blank" rel="noreferrer">
+                      <FiGithub size={16} /> Source Code
+                    </SecondaryLink>
                   )}
                 </ModalLinks>
               </ModalBody>
-            </ModalContent>
-          </ModalOverlay>
+            </ModalCard>
+          </Overlay>
         )}
       </AnimatePresence>
-    </ProjectsSection>
+    </Section>
   );
 };
 

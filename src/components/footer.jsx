@@ -1,148 +1,108 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa';
 import { FiDownload } from 'react-icons/fi';
-import { motion } from 'framer-motion';
 
-const FooterContainer = styled.footer`
-  margin-top: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 2rem;
-  background: ${({ theme }) => theme.colors.backgroundSecondary};
-  color: ${({ theme }) => theme.colors.textSecondary};
+const FooterEl = styled.footer`
+  padding: 1.5rem clamp(1.5rem, 6vw, 5rem);
   border-top: 1px solid ${({ theme }) => theme.colors.border};
-  position: relative;
+  background: ${({ theme }) => theme.colors.surface};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, ${({ theme }) => theme.colors.accent}40, transparent);
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.25rem 2rem;
+  @media (min-width: 640px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0;
   }
 `;
 
-const LeftSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const CenterSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RightSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Copyright = styled.p`
-  font-size: 0.85rem;
+const Copy = styled.p`
+  font-size: 0.82rem;
   color: ${({ theme }) => theme.colors.textSecondary};
-  margin: 0;
-  opacity: 0.8;
 `;
 
-const IconLinks = styled.div`
+const IconRow = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 0.6rem;
+`;
 
-  a {
-    color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    opacity: 0.8;
+const IconLink = styled(motion.a)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 1rem;
+  transition: all 0.2s ease;
 
-    &:hover {
-      color: ${({ theme }) => theme.colors.accent};
-      opacity: 1;
-      transform: translateY(-2px);
-    }
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    background: ${({ theme }) => theme.colors.accentDim};
   }
 `;
 
-const CVButton = styled(motion.a)`
-  display: flex;
+const CVBtn = styled(motion.a)`
+  display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: ${({ theme }) => theme.colors.background};
+  padding: 0.42rem 1rem;
   border: 1px solid ${({ theme }) => theme.colors.border};
-  padding: 0.45rem 1rem;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  text-decoration: none;
   color: ${({ theme }) => theme.colors.textSecondary};
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  background: transparent;
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.accent};
     color: ${({ theme }) => theme.colors.accent};
-    background: ${({ theme }) => theme.colors.accent}15;
-    transform: translateY(-1px);
+    background: ${({ theme }) => theme.colors.accentDim};
   }
 `;
 
-const Footer = () => {
-  return (
-    <FooterContainer>
-      <LeftSection>
-        <Copyright>
-          © {new Date().getFullYear()} Khayrullo Isomiddinov
-        </Copyright>
-      </LeftSection>
+const socials = [
+  { href: 'https://github.com/khayrullo-isomiddinov',                        icon: <FaGithub />,    label: 'GitHub'    },
+  { href: 'https://www.linkedin.com/in/khayrullo-isomiddinov/',               icon: <FaLinkedin />,  label: 'LinkedIn'  },
+  { href: 'https://www.facebook.com/profile.php?id=100080260460705',          icon: <FaFacebook />,  label: 'Facebook'  },
+  { href: 'https://instagram.com/khayrulloismdnv',                            icon: <FaInstagram />, label: 'Instagram' },
+];
 
-      <CenterSection>
-        <IconLinks>
-          <motion.a href="https://github.com/khayrullo-isomiddinov" target="_blank" rel="noreferrer" whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}>
-            <FaGithub />
-          </motion.a>
+const Footer = () => (
+  <FooterEl>
+    <Copy>© {new Date().getFullYear()} Khayrullo Isomiddinov</Copy>
 
-          <motion.a href="https://www.linkedin.com/in/khayrullo-isomiddinov/" target="_blank" rel="noreferrer" whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}>
-            <FaLinkedin />
-          </motion.a>
-
-          <motion.a href="https://www.facebook.com/profile.php?id=100080260460705" target="_blank" rel="noreferrer" whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}>
-            <FaFacebook />
-          </motion.a>
-
-          <motion.a href="https://instagram.com/khayrulloismdnv" target="_blank" rel="noreferrer" whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.9 }}>
-            <FaInstagram />
-          </motion.a>
-        </IconLinks>
-      </CenterSection>
-
-      <RightSection>
-        <CVButton
-          href="/CV.pdf"
-          download="HarryResume.pdf"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
+    <IconRow>
+      {socials.map(({ href, icon, label }) => (
+        <IconLink
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={label}
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.92 }}
         >
-          <FiDownload size={14} />
-          Download CV
-        </CVButton>
-      </RightSection>
-    </FooterContainer>
-  );
-};
+          {icon}
+        </IconLink>
+      ))}
+    </IconRow>
+
+    <CVBtn
+      href="/cv.pdf"
+      download="HarryResume.pdf"
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.96 }}
+    >
+      <FiDownload size={13} /> Download CV
+    </CVBtn>
+  </FooterEl>
+);
 
 export default Footer;

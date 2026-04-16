@@ -1,421 +1,228 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import myPhoto from "../assets/images/shopkojiro.png";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FiArrowRight, FiDownload } from 'react-icons/fi';
+
+// ── Layout ──────────────────────────────────────────────────────────────────
 
 const HeroSection = styled.section`
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  padding: 0 2rem;
-  background: radial-gradient(circle at 20% 40%, rgba(50, 30, 120, 0.18), transparent 60%), #0b0e2a;
-
-  text-align: center;
-  color: ${({ theme }) => theme.colors.text};
-  overflow: hidden;
-
-  @media (max-width: 767px) {
-    padding: 5rem 1rem 2rem;
-    min-height: auto;
-    justify-content: flex-start;
-    padding-top: 6rem;
-  }
-
-  @media (max-width: 480px) {
-    padding-top: 5rem;
-    padding-bottom: 1rem;
-  }
-`;
-
-const ContentContainer = styled(motion.div)`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  z-index: 1;
-  gap: 1rem;
-
-  @media (max-width: 767px) {
-    gap: 0.5rem;
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: 0.8fr 1.2fr;
-    text-align: left;
-    height: 100vh;
-    gap: 2rem;
-  }
-`;
-
-const PhotoContainer = styled(motion.div)`
-  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding-left: 2rem;
-
-  /* Ambient glow behind the photo for natural blending */
-  &::before {
-    content: "";
-    position: absolute;
-    width: 480px;
-    height: 480px;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(140, 94, 255, 0.25) 0%,
-      rgba(140, 94, 255, 0.15) 30%,
-      rgba(50, 30, 120, 0.1) 50%,
-      transparent 70%
-    );
-    filter: blur(50px);
-    top: 52%;
-    left: 55%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    animation: glowPulse 4s ease-in-out infinite;
-  }
-
-  /* Soft ambient overlay for edge blending */
-  &::after {
-    content: "";
-    position: absolute;
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
-    background: radial-gradient(
-      ellipse at center,
-      transparent 0%,
-      transparent 40%,
-      rgba(11, 14, 42, 0.3) 70%,
-      rgba(11, 14, 42, 0.6) 100%
-    );
-    border-radius: 50%;
-    z-index: 0;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-  }
-
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-  }
-
-  @media (max-width: 767px) {
-    padding-left: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0.5rem;
-    max-height: 40vh;
-    min-height: 280px;
-
-    &::before {
-      width: 280px;
-      height: 280px;
-      top: 50%;
-      left: 50%;
-      filter: blur(35px);
-    }
-
-    &::after {
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    max-height: 35vh;
-    min-height: 240px;
-
-    &::before {
-      width: 220px;
-      height: 220px;
-      filter: blur(30px);
-    }
-  }
-
-  @media (max-width: 360px) {
-    max-height: 30vh;
-    min-height: 200px;
-
-    &::before {
-      width: 180px;
-      height: 180px;
-    }
-  }
+  padding: 6rem clamp(1.5rem, 6vw, 5rem) 4rem;
+  background: ${({ theme }) => theme.colors.background};
 `;
 
-const PhotoWrapper = styled.div`
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0px 30px 60px rgba(0, 0, 0, 0.5));
+const HeroGrid = styled(motion.div)`
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
 `;
 
-const Photo = styled.img`
-  width: 82%;
-  height: auto;
-  max-height: 100%;
-  object-fit: contain;
-  position: relative;
-  z-index: 2;
+// ── Text Side ────────────────────────────────────────────────────────────────
 
-  /* Natural blending with background - soft edges */
-  filter: 
-    drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.6))
-    drop-shadow(0px 0px 30px rgba(139, 92, 246, 0.2))
-    brightness(0.98)
-    contrast(1.03);
-  
-  /* Soft edge blending for natural integration */
-  -webkit-mask-image: radial-gradient(
-    ellipse 85% 90% at 50% 50%,
-    black 65%,
-    rgba(0, 0, 0, 0.8) 80%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 85% 90% at 50% 50%,
-    black 65%,
-    rgba(0, 0, 0, 0.8) 80%,
-    transparent 100%
-  );
-
-  margin-top: -4rem;
-  margin-left: 3.5rem;
-
-  /* Smooth hover effect */
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    transform: translateY(-4px);
-    filter: 
-      drop-shadow(0px 25px 50px rgba(0, 0, 0, 0.7))
-      drop-shadow(0px 0px 40px rgba(139, 92, 246, 0.3))
-      brightness(1.02)
-      contrast(1.05);
-  }
-
-  @media (max-width: 767px) {
-    width: 60%;
-    max-width: 300px;
-    margin-top: 0;
-    margin-left: 0;
-    margin-bottom: 0;
-    filter: 
-      drop-shadow(0px 15px 35px rgba(0, 0, 0, 0.5))
-      drop-shadow(0px 0px 20px rgba(139, 92, 246, 0.15))
-      brightness(0.98)
-      contrast(1.03);
-    
-    -webkit-mask-image: radial-gradient(
-      ellipse 80% 85% at 50% 50%,
-      black 60%,
-      rgba(0, 0, 0, 0.75) 75%,
-      transparent 100%
-    );
-    mask-image: radial-gradient(
-      ellipse 80% 85% at 50% 50%,
-      black 60%,
-      rgba(0, 0, 0, 0.75) 75%,
-      transparent 100%
-    );
-
-    &:hover {
-      filter: 
-        drop-shadow(0px 18px 40px rgba(0, 0, 0, 0.6))
-        drop-shadow(0px 0px 25px rgba(139, 92, 246, 0.2))
-        brightness(1.02)
-        contrast(1.05);
-    }
-  }
-
-  @media (max-width: 480px) {
-    width: 55%;
-    max-width: 250px;
-  }
-
-  @media (max-width: 360px) {
-    width: 50%;
-    max-width: 220px;
-  }
-`;
-
-
-
-
-
-const TextContainer = styled(motion.div)`
+const TextSide = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 1;
-
-  @media (max-width: 767px) {
-    padding: 1rem 0.5rem;
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    padding: 3rem;
-  }
 `;
 
-const Greeting = styled(motion.p)`
-  font-size: 1.1rem;
+const Eyebrow = styled(motion.p)`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
   color: ${({ theme }) => theme.colors.accent};
   margin-bottom: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  opacity: 0.9;
 `;
 
-const Name = styled(motion.h1)`
-  font-size: 2rem;
-  font-weight: 700;
+const HeroName = styled(motion.h1)`
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
   margin-bottom: 0.75rem;
-  line-height: 1.2;
-
-  @media (min-width: 480px) {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 3.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 4rem;
-  }
+  color: ${({ theme }) => theme.colors.text};
 `;
 
-const Title = styled(motion.h2)`
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  margin-bottom: 1rem;
-  line-height: 1.3;
-
-  @media (min-width: 480px) {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.75rem;
-  }
-`;
-
-const Description = styled(motion.p)`
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: ${({ theme }) => theme.colors.textSecondary};
-  max-width: 500px;
-  margin: 0 auto;
-
-  @media (min-width: 480px) {
-    font-size: 1.1rem;
-    line-height: 1.7;
-  }
-
-  @media (min-width: 768px) {
-    margin: 0;
-    text-align: left;
-  }
-`;
-
-const CTAButton = styled(motion.a)`
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  background: transparent;
-  border: 2px solid ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.accent};
-  text-decoration: none;
-  border-radius: 6px;
+const HeroRole = styled(motion.p)`
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
   font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
+`;
+
+const Divider = styled(motion.div)`
+  width: 32px;
+  height: 2px;
+  background: ${({ theme }) => theme.colors.accent};
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
+`;
+
+const HeroBio = styled(motion.p)`
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  max-width: 480px;
+  margin-bottom: 2.25rem;
+`;
+
+const ButtonGroup = styled(motion.div)`
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  align-items: center;
+`;
+
+const PrimaryBtn = styled(motion.a)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.78rem 1.5rem;
+  background: ${({ theme }) => theme.colors.accent};
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.accent};
-    color: ${({ theme }) => theme.colors.background};
+    background: ${({ theme }) => theme.colors.accentHover};
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+    box-shadow: 0 6px 22px rgba(139, 92, 246, 0.32);
   }
 `;
 
-const containerVariants = {
+const SecondaryBtn = styled(motion.a)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.78rem 1.5rem;
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  border: 1.5px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.45);
+    color: ${({ theme }) => theme.colors.text};
+    transform: translateY(-2px);
+  }
+`;
+
+const SocialRow = styled(motion.div)`
+  display: flex;
+  gap: 0.6rem;
+`;
+
+const SocialIcon = styled(motion.a)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 1.1rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    border-color: rgba(139, 92, 246, 0.35);
+    background: ${({ theme }) => theme.colors.accentDim};
+  }
+`;
+
+// ── Animation Variants ────────────────────────────────────────────────────────
+
+const containerVar = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.6, -0.05, 0.01, 0.99],
-    },
-  },
+const itemVar = {
+  hidden:  { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
 };
 
-const Hero = () => {
-  return (
-    <HeroSection id="hero">
-      <ContentContainer
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <PhotoContainer variants={itemVariants}>
-          <PhotoWrapper>
-            <Photo src={myPhoto} alt="Khayrullo Isomiddinov" />
-          </PhotoWrapper>
-        </PhotoContainer>
+// ── Component ─────────────────────────────────────────────────────────────────
 
-        <TextContainer>
-          <Greeting variants={itemVariants}>
-            Hi, my name is
-          </Greeting>
+const Hero = () => (
+  <HeroSection id="hero">
+    <HeroGrid variants={containerVar} initial="hidden" animate="visible">
+      <TextSide>
+        <Eyebrow variants={itemVar}>Hello, I'm</Eyebrow>
 
-          <Name variants={itemVariants}>
-            Khayrullo Isomiddinov.
-          </Name>
+        <HeroName variants={itemVar}>
+          Khayrullo Isomiddinov
+        </HeroName>
 
-          <Title variants={itemVariants}>
-            and I love building stuff.
-          </Title>
+        <HeroRole variants={itemVar}>Software Engineer</HeroRole>
 
-          <Description variants={itemVariants}>
-            I'm a student of Computer Science at ELTE, and I am crazy about backend development, databases, and solving complex challenges.
-          </Description>
+        <Divider variants={itemVar} />
 
-          <CTAButton
-            variants={itemVariants}
+        <HeroBio variants={itemVar}>
+          CS student at ELTE Budapest. I build systems that scale, ship code that lasts,
+          and turn complex problems into clean solutions.
+        </HeroBio>
+
+        <ButtonGroup variants={itemVar}>
+          <PrimaryBtn
             href="#projects"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            View Projects <FiArrowRight size={14} />
+          </PrimaryBtn>
+          <SecondaryBtn
+            href="/cv.pdf"
+            download
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            <FiDownload size={14} /> Download CV
+          </SecondaryBtn>
+        </ButtonGroup>
+
+        <SocialRow variants={itemVar}>
+          <SocialIcon
+            href="https://github.com/khayrullo-isomiddinov"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            View My Work
-          </CTAButton>
-        </TextContainer>
-      </ContentContainer>
-    </HeroSection>
-  );
-};
+            <FaGithub />
+          </SocialIcon>
+          <SocialIcon
+            href="https://www.linkedin.com/in/khayrullo-isomiddinov/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaLinkedin />
+          </SocialIcon>
+        </SocialRow>
+      </TextSide>
+    </HeroGrid>
+  </HeroSection>
+);
 
 export default Hero;

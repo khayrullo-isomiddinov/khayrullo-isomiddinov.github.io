@@ -20,4 +20,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment files
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cloudflare
+.wrangler/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini

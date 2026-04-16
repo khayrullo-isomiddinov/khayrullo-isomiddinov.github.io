@@ -4,65 +4,55 @@ import { motion } from 'framer-motion';
 import { useForm, ValidationError } from '@formspree/react';
 import { FiMail, FiSend } from 'react-icons/fi';
 
-const ContactSection = styled.section`
-  scroll-margin-top: 80px;
-  padding: 3rem 2rem;
-  text-align: center;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text};
-  position: relative;
-  overflow: hidden;
+// ── Layout ───────────────────────────────────────────────────────────────────
+
+const Section = styled.section`
+  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+  background: ${({ theme }) => theme.colors.surface};
 `;
 
 const Container = styled.div`
-  max-width: 600px;
+  max-width: 560px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
+`;
+
+const SectionHeader = styled.div`
+  margin-bottom: 2.75rem;
+  text-align: center;
+`;
+
+const SectionLabel = styled.p`
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colors.accent};
+  margin-bottom: 0.8rem;
 `;
 
 const SectionTitle = styled(motion.h2)`
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: ${({ theme }) => theme.colors.text};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.text}, ${({ theme }) => theme.colors.accent});
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
-  }
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.85rem;
 `;
 
-const SectionSubtitle = styled(motion.p)`
-  color: ${({ theme }) => theme.colors.textSecondary};
+const SectionSub = styled(motion.p)`
   font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  max-width: 550px;
-  margin-left: auto;
-  margin-right: auto;
+  line-height: 1.75;
+  color: ${({ theme }) => theme.colors.textSecondary};
 `;
 
-const Divider = styled.div`
-  height: 2px;
-  background: linear-gradient(90deg, transparent, ${({ theme }) => theme.colors.accent}, transparent);
-  width: 100px;
-  margin: 0 auto 1.5rem;
-`;
+// ── Form ─────────────────────────────────────────────────────────────────────
 
-const ContactForm = styled(motion.form)`
+const Form = styled(motion.form)`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  background: ${({ theme }) => theme.colors.cardBg};
-  padding: 1.75rem;
-  border-radius: 12px;
+  gap: 1.1rem;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid ${({ theme }) => theme.colors.border};
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 2rem;
   position: relative;
   overflow: hidden;
 
@@ -72,274 +62,248 @@ const ContactForm = styled(motion.form)`
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, ${({ theme }) => theme.colors.accent}, ${({ theme }) => theme.colors.accentHover});
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      ${({ theme }) => theme.colors.accent},
+      ${({ theme }) => theme.colors.accentHover}
+    );
   }
 `;
 
-const FormGroup = styled.div`
+const Field = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  text-align: left;
-  position: relative;
+  gap: 0.45rem;
 `;
 
 const Label = styled.label`
-  color: ${({ theme }) => theme.colors.text};
-  font-weight: 500;
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const inputBase = `
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: inherit;
+  transition: all 0.2s ease;
+  outline: none;
+
+  &::placeholder { color: rgba(112, 112, 160, 0.6); }
+
+  &:focus {
+    border-color: rgba(139, 92, 246, 0.5);
+    background: rgba(139, 92, 246, 0.04);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
+  }
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem 1rem;
+  ${inputBase}
   border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  font-family: inherit;
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.accent};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accent}15,
-                0 4px 12px ${({ theme }) => theme.colors.accent}20;
-    transform: translateY(-1px);
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.textSecondary};
-    opacity: 0.6;
-  }
 `;
 
 const TextArea = styled.textarea`
-  width: 100%;
-  padding: 0.75rem 1rem;
+  ${inputBase}
   border: 1.5px solid ${({ theme }) => theme.colors.border};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text};
-  font-size: 0.95rem;
   resize: vertical;
-  min-height: 100px;
-  font-family: inherit;
-  transition: all 0.3s ease;
-  line-height: 1.6;
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.accent};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.colors.accent}15,
-                0 4px 12px ${({ theme }) => theme.colors.accent}20;
-    transform: translateY(-1px);
-  }
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.textSecondary};
-    opacity: 0.6;
-  }
+  min-height: 120px;
+  line-height: 1.65;
 `;
 
-const SubmitButton = styled(motion.button)`
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent}, ${({ theme }) => theme.colors.accentHover});
-  color: ${({ theme }) => theme.colors.background};
-  padding: 0.875rem 2rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 0.25rem;
+const ErrorMsg = styled.p`
+  font-size: 0.8rem;
+  color: #f87171;
+  margin-top: 0.15rem;
+`;
+
+const SubmitBtn = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+  gap: 0.5rem;
+  padding: 0.85rem;
+  background: ${({ theme }) => theme.colors.accent};
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.93rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
 
-  &::before {
+  &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
   }
 
   &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.colors.accentHover};
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
-    
-    &::before {
-      left: 100%;
-    }
-  }
 
-  &:active:not(:disabled) {
-    transform: translateY(0);
+    &::after { transform: translateX(100%); }
   }
 
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.55;
     cursor: not-allowed;
     transform: none;
   }
 `;
 
-const ThankYouMessage = styled(motion.div)`
+// ── Thank You ─────────────────────────────────────────────────────────────────
+
+const ThankYou = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  gap: 1.5rem;
-  background: ${({ theme }) => theme.colors.cardBg};
-  border-radius: 16px;
+  gap: 1rem;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid ${({ theme }) => theme.colors.border};
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
 `;
 
-const ThankYouIcon = styled.div`
-  width: 60px;
-  height: 60px;
+const CheckCircle = styled.div`
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, ${({ theme }) => theme.colors.accent}, ${({ theme }) => theme.colors.accentHover});
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: ${({ theme }) => theme.colors.background};
-  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #fff;
 `;
 
-const ThankYouTitle = styled.h2`
-  font-size: 1.5rem;
+const ThankTitle = styled.h3`
+  font-size: 1.4rem;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.accent};
-  margin-bottom: 0.25rem;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
-const ThankYouText = styled.p`
-  font-size: 0.95rem;
+const ThankText = styled.p`
+  font-size: 0.93rem;
+  line-height: 1.7;
   color: ${({ theme }) => theme.colors.textSecondary};
-  line-height: 1.6;
-  max-width: 450px;
+  max-width: 400px;
 `;
 
-const ErrorMessage = styled.div`
-  color: #ef4444;
-  font-size: 0.9rem;
-  margin-top: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`;
+// ── Variants ──────────────────────────────────────────────────────────────────
+
+const fadeUp = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+// ── Component ─────────────────────────────────────────────────────────────────
 
 const Contact = () => {
-  const [state, handleSubmit] = useForm("mdkaewvz");
-
-  if (state.succeeded) {
-    return (
-      <ContactSection id="contact">
-        <Container>
-          <ThankYouMessage
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <ThankYouIcon>✓</ThankYouIcon>
-            <ThankYouTitle>Message Sent!</ThankYouTitle>
-            <ThankYouText>
-              I've received your message and will get back to you as soon as possible. 
-              Looking forward to connecting with you!
-            </ThankYouText>
-          </ThankYouMessage>
-        </Container>
-      </ContactSection>
-    );
-  }
+  const [state, handleSubmit] = useForm('mdkaewvz');
 
   return (
-    <ContactSection id="contact">
+    <Section id="contact">
       <Container>
-        <SectionTitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Get In Touch
-        </SectionTitle>
-        <SectionSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Whether you want to discuss a project, collaborate, or just say hello,
-          feel free to drop a message. I'll get back to you as soon as I can!
-        </SectionSubtitle>
-        <Divider />
-        
-        <ContactForm
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <FormGroup>
-            <Label htmlFor="email">
-              <FiMail size={16} />
-              Email Address
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="your.email@example.com"
-              required
-            />
-            <ValidationError prefix="Email" field="email" errors={state.errors} />
-          </FormGroup>
-
-          <FormGroup>
-            <Label htmlFor="message">
-              <FiSend size={16} />
-              Message
-            </Label>
-            <TextArea
-              id="message"
-              name="message"
-              placeholder="Tell me about your project, idea, or just say hello..."
-              required
-            />
-            <ValidationError prefix="Message" field="message" errors={state.errors} />
-          </FormGroup>
-
-          <SubmitButton
-            type="submit"
-            disabled={state.submitting}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+        <SectionHeader>
+          <SectionLabel>Contact</SectionLabel>
+          <SectionTitle
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
           >
-            <FiSend size={18} />
-            {state.submitting ? 'Sending...' : 'Send Message'}
-          </SubmitButton>
-        </ContactForm>
+            Let's Talk
+          </SectionTitle>
+          <SectionSub
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.1 }}
+          >
+            Have a project in mind, want to collaborate, or just want to say hello?
+            Drop me a message and I'll get back to you.
+          </SectionSub>
+        </SectionHeader>
+
+        {state.succeeded ? (
+          <ThankYou
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+          >
+            <CheckCircle>✓</CheckCircle>
+            <ThankTitle>Message received.</ThankTitle>
+            <ThankText>
+              Thanks for reaching out — I'll get back to you as soon as I can.
+            </ThankText>
+          </ThankYou>
+        ) : (
+          <Form
+            onSubmit={handleSubmit}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.15 }}
+          >
+            <Field>
+              <Label htmlFor="email">
+                <FiMail size={14} /> Email
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+              <ValidationError prefix="Email" field="email" errors={state.errors} component={ErrorMsg} />
+            </Field>
+
+            <Field>
+              <Label htmlFor="message">
+                <FiSend size={14} /> Message
+              </Label>
+              <TextArea
+                id="message"
+                name="message"
+                placeholder="What's on your mind?"
+                required
+              />
+              <ValidationError prefix="Message" field="message" errors={state.errors} component={ErrorMsg} />
+            </Field>
+
+            <SubmitBtn
+              type="submit"
+              disabled={state.submitting}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <FiSend size={16} />
+              {state.submitting ? 'Sending…' : 'Send Message'}
+            </SubmitBtn>
+          </Form>
+        )}
       </Container>
-    </ContactSection>
+    </Section>
   );
 };
 

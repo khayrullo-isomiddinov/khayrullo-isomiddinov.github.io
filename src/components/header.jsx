@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 clamp(1.5rem, 6vw, 5rem);
   position: fixed;
   width: 100%;
-  height: 80px;
-  background: ${({ scrolled, theme }) => 
-    scrolled ? `${theme.colors.background}dd` : theme.colors.background};
-  backdrop-filter: blur(10px);
-  box-shadow: ${({ scrolled, theme }) => 
-    scrolled ? theme.shadows.header : 'none'};
+  height: 72px;
+  background: ${({ $scrolled, theme }) =>
+    $scrolled ? `${theme.colors.background}e8` : theme.colors.background};
+  backdrop-filter: blur(14px);
+  box-shadow: ${({ $scrolled, theme }) =>
+    $scrolled ? theme.shadows.header : 'none'};
   z-index: 999;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 `;
 
 const Logo = styled(motion.div)`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.accent};
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.text} 0%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   cursor: pointer;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accentHover};
-  }
 `;
 
 const NavLinks = styled.nav`
@@ -38,10 +37,10 @@ const NavLinks = styled.nav`
   align-items: center;
 
   a {
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.textSecondary};
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     position: relative;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -137,6 +136,21 @@ const MobileNavLink = styled.a`
   }
 `;
 
+const ProgressBar = styled(motion.div)`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    ${({ theme }) => theme.colors.accent},
+    ${({ theme }) => theme.colors.accentHover}
+  );
+  box-shadow: 0 0 8px ${({ theme }) => theme.colors.accent}70;
+  transform-origin: left;
+`;
+
 const Overlay = styled(motion.div)`
   position: fixed;
   inset: 0;
@@ -148,6 +162,7 @@ const Overlay = styled(motion.div)`
 function Header() {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -180,8 +195,9 @@ function Header() {
 
   return (
     <>
-      <HeaderContainer scrolled={scrolled}>
-        <Logo 
+      <HeaderContainer $scrolled={scrolled}>
+        <ProgressBar style={{ scaleX: scrollYProgress }} />
+        <Logo
           onClick={() => handleScroll('hero')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
