@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 // ── Layout ───────────────────────────────────────────────────────────────────
 
 const Section = styled.section`
-  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 6vw, 5rem) clamp(5rem, 10vw, 8rem);
   background: ${({ theme }) => theme.colors.surface};
 `;
 

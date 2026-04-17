@@ -6,7 +6,7 @@ import { FiGithub, FiExternalLink, FiX, FiChevronDown } from 'react-icons/fi';
 // ── Layout ───────────────────────────────────────────────────────────────────
 
 const Section = styled.section`
-  padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 5rem);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 6vw, 5rem) clamp(5rem, 10vw, 8rem);
   background: ${({ theme }) => theme.colors.background};
 `;
 
@@ -72,13 +72,15 @@ const CardImage = styled.div`
   height: 200px;
   position: relative;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.surface};
+  background: ${({ gradient, theme }) => gradient || theme.colors.surface};
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('${({ imageUrl }) => imageUrl}') center / cover no-repeat;
+    background: ${({ imageUrl }) => imageUrl
+      ? `url('${imageUrl}') center / cover no-repeat`
+      : 'none'};
     transition: transform 0.5s ease;
   }
 
@@ -208,13 +210,15 @@ const ModalImageWrapper = styled.div`
   height: 260px;
   position: relative;
   overflow: hidden;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ gradient, theme }) => gradient || theme.colors.background};
 
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: url('${({ imageUrl }) => imageUrl}') center / cover no-repeat;
+    background: ${({ imageUrl }) => imageUrl
+      ? `url('${imageUrl}') center / cover no-repeat`
+      : 'none'};
     opacity: 0.45;
   }
 
@@ -321,9 +325,9 @@ const myProjects = [
     id: 1,
     title: 'PeerPrep',
     description:
-      'A real-time study-group platform with WebSocket chat, vector-clock message synchronisation, AI-assisted event descriptions, and a gamification engine built on FastAPI and React.',
+      'A real-time study platform where students form groups, chat live, and get AI help writing their event posts — built with FastAPI and React.',
     longDescription:
-      'PeerPrep is a full-stack study-group platform built with FastAPI and React. Users create and join study events, chat in real time, and enhance their posts with AI-generated descriptions and cover images. The chat system uses WebSockets with a vector-clock algorithm to maintain causal message ordering across clients. The backend includes JWT authentication with Argon2 hashing, an XP and streak-based gamification engine, caching, lazy loading, optimistic updates, and GZip compression. The data layer uses SQLModel on top of SQLite with a normalised schema and modular service architecture.',
+      'PeerPrep started as a simple study-group tool and grew into something much more interesting. Students create events, invite others, and chat in real time — with a vector-clock system keeping messages in the right order across every client. Posts can be written by hand or handed off to the AI, which generates a description and cover image on the spot. Under the hood there\'s JWT auth with Argon2 hashing, an XP and streak engine that keeps people coming back, and a FastAPI backend that leans on caching, lazy loading, and GZip to stay fast.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/PeerPrep',
     liveLink: 'https://github.com/khayrullo-isomiddinov/PeerPrep',
     techStack: ['FastAPI', 'SQLModel', 'SQLite', 'WebSockets', 'React 19', 'JWT Auth', 'OpenAI API', 'Vector Clocks'],
@@ -333,9 +337,9 @@ const myProjects = [
     id: 2,
     title: 'Polaris LMS',
     description:
-      'A full-stack learning management system for teachers and students — assignment management, grading, role-based dashboards, and secure authentication built on Laravel.',
+      'A learning management system where teachers post assignments, students submit work, and everyone gets their own dashboard — built on Laravel.',
     longDescription:
-      'Polaris is a full-stack Learning Management System built with Laravel. Teachers create subjects and assignments with deadlines and point values, then grade student submissions with written feedback. Students enrol in subjects, view all assignments, and submit their work. The system includes role-based dashboards, authentication via Laravel Breeze, profile management, and a clean responsive interface styled with Tailwind CSS. It demonstrates full-stack PHP development, Eloquent ORM, RESTful routing, RBAC, form validation, and secure auth.',
+      'Polaris is a clean, no-frills LMS built with Laravel. Teachers set up subjects, post assignments with deadlines and point values, then mark submissions and leave written feedback. Students see everything laid out in their own dashboard and submit their work in a few clicks. The whole thing runs on role-based auth via Laravel Breeze, Eloquent ORM for the data layer, and Tailwind CSS for a tidy responsive look. Simple to use, solid underneath.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/polarisLMS',
     liveLink: 'https://github.com/khayrullo-isomiddinov/polarisLMS',
     techStack: ['Laravel 12', 'PHP 8', 'Blade', 'SQLite', 'Tailwind CSS', 'MVC'],
@@ -343,47 +347,73 @@ const myProjects = [
   },
   {
     id: 3,
-    title: 'Booklovers Hub',
+    title: 'Erasmus+ Mobility Portal',
     description:
-      'A social reading platform where users follow each other, share books, leave reviews, and build virtual collections — built with Laravel and a relational database.',
+      'The live course selection portal for incoming Erasmus+ students at the University of Split — built for real students and actively maintained.',
     longDescription:
-      'Booklovers Hub is a community-driven reading platform built with Laravel. Users create accounts, follow or unfollow other readers, share books, write reviews, and build personal collections. The system supports full user profiles, book records, social connections, and a shared feed. The project demonstrates relational database design, user-management logic, social-feature implementation, secure authentication, and the Laravel ecosystem.',
-    repoLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
-    liveLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
-    techStack: ['PHP', 'MySQL', 'Laravel', 'Blade', 'JavaScript'],
-    imageUrl: new URL('../assets/images/books.jpeg', import.meta.url).href,
+      'This one is live and in use. I built the official Erasmus+ course selection portal for the Faculty of Humanities and Social Sciences at the University of Split, replacing the old email-back-and-forth process with a clean four-step flow. Students fill in their details, declare their language level, then browse only the courses they\'re actually eligible for. Each submission gets a unique reference number so nothing slips through the cracks. On the coordinator side there\'s a full dashboard for reviewing applications, approving or rejecting individual courses, and managing the course catalogue. It\'s deployed on Render and handles real exchange students every semester.',
+    repoLink: null,
+    liveLink: 'https://unisplit-mobility.onrender.com',
+    techStack: ['JavaScript', 'PHP', 'HTML / CSS', 'REST API', 'Render'],
+    imageUrl: new URL('../assets/images/split.png', import.meta.url).href,
+    gradient: 'linear-gradient(135deg, #003399 0%, #0052cc 55%, #1a73e8 80%, #003399 100%)',
   },
+  
   {
     id: 4,
+    title: 'Transport Tycoon',
+    description:
+      'A JavaFX desktop game where you build road and rail networks, send out buses and trains, and try to run a profitable transport company.',
+    longDescription:
+      'Transport Tycoon is a tile-based simulation game built in JavaFX. You start with a small map and limited funds, then slowly build out roads and railways, set up stations, and dispatch vehicles to carry passengers and cargo between cities. Revenue comes from efficient routes, so planning matters just as much as building. The project uses Maven for dependency management and Ant for the build pipeline — a good chance to work with proper Java tooling on a non-trivial codebase.',
+    repoLink: 'https://szofttech.inf.elte.hu/software-technology-2026/group-12/team-404',
+    liveLink: null,
+    techStack: ['Java', 'JavaFX', 'Maven', 'Ant', 'OOP'],
+    imageUrl: new URL('../assets/images/tycoon.png', import.meta.url).href,
+  },
+  {
+    id: 5,
     title: 'Stargate Game',
     description:
-      'A multiplayer grid-based strategy game where players navigate the board and collect scattered debris fragments, built with vanilla web technologies.',
+      'A browser multiplayer game where players move around a shared grid and race to collect the most debris — no frameworks, just plain JavaScript.',
     longDescription:
-      'Stargate is a browser-based multiplayer grid game. Players navigate a shared board and compete to collect debris fragments. The game features real-time multiplayer functionality, turn-based mechanics, and a responsive game interface. It is deployed live and demonstrates proficiency in vanilla JavaScript, DOM manipulation, and game state management.',
+      'Stargate is a live multiplayer grid game built from scratch with vanilla JavaScript. Players share the same board and take turns moving, trying to collect debris fragments before the other side does. There\'s no framework doing the heavy lifting — just clean DOM manipulation, game state logic, and a real-time multiplayer layer wired together by hand. It\'s live and playable right now.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/Stargate-Game',
     liveLink: 'https://khayrullo.com/Stargate-Game/',
     techStack: ['HTML', 'CSS', 'JavaScript'],
     imageUrl: new URL('../assets/images/gate.png', import.meta.url).href,
   },
   {
-    id: 5,
+    id: 6,
+    title: 'Booklovers Hub',
+    description:
+      'A social platform for readers — follow friends, share books, write reviews, and build your personal collection, all built with Laravel.',
+    longDescription:
+      'Booklovers Hub is a reading community built on Laravel. You sign up, set up a profile, and start following other readers. You can share books, write reviews, and build up a personal collection over time. Everyone has a shared feed where new books and reviews show up. The database handles users, books, social connections, and reviews cleanly, and the whole thing sits behind secure authentication. It\'s a straightforward social app, but it covers a lot of ground.',
+    repoLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
+    liveLink: 'https://github.com/khayrullo-isomiddinov/booklovers-hub',
+    techStack: ['PHP', 'MySQL', 'Laravel', 'Blade', 'JavaScript'],
+    imageUrl: new URL('../assets/images/books.jpeg', import.meta.url).href,
+  },
+  {
+    id: 7,
     title: 'Comment Remover',
     description:
-      'A published VSCode extension that strips comments from source files across seven languages — JavaScript, TypeScript, Python, C, C++, PHP, and Java.',
+      'A published VS Code extension that removes all comments from your source files — supports seven languages and has thousands of downloads.',
     longDescription:
-      'Comment Remover is a Visual Studio Code extension that helps developers quickly clean up source files by removing all comments. It supports JavaScript, TypeScript, Python, C, C++, PHP, and Java with intelligent language-aware comment detection. The extension has been downloaded thousands of times and is available on the VS Code Marketplace. It demonstrates TypeScript development, the VS Code extension API, and publishing to a production marketplace.',
+      'Comment Remover does one thing well: it strips comments out of your code. It works across JavaScript, TypeScript, Python, C, C++, PHP, and Java, with language-aware detection so it handles each syntax correctly. I published it to the VS Code Marketplace and it\'s picked up thousands of downloads. Shipping a real tool that people actually install and use was a good experience — it\'s not just a side project.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/comment-remover-vscode-ext',
     liveLink: 'https://marketplace.visualstudio.com/items?itemName=KhayrulloIsomiddinov.khayrullo-comment-remover',
     techStack: ['TypeScript', 'VS Code API', 'Node.js'],
     imageUrl: new URL('../assets/images/vscode.png', import.meta.url).href,
   },
   {
-    id: 6,
+    id: 8,
     title: 'MoodLens',
     description:
-      'An AI-powered augmented reality application that analyses emotional states in real time using facial recognition and voice analysis, providing interactive well-being tools.',
+      'An AR app that reads your facial expressions and tone of voice in real time, then uses AI to reflect back what you\'re feeling.',
     longDescription:
-      'MoodLens is an AI-powered AR application designed to analyse emotional states and support well-being. It combines facial recognition, voice analysis, and interactive AR therapy to provide real-time emotional insights. Built with React and Node.js, it demonstrates integration of machine-learning APIs, real-time media processing, and an interactive frontend UI.',
+      'MoodLens combines facial recognition and voice analysis to pick up on how you\'re feeling, then layers AR feedback on top to make it interactive. The idea was to go beyond a simple mood tracker — it responds to you in the moment rather than asking you to log feelings manually. It\'s built with React and Node.js, hooked up to ML APIs for the emotion detection, and deployed live. Working out the real-time media processing side was the most interesting part.',
     repoLink: 'https://github.com/khayrullo-isomiddinov/mood-lens',
     liveLink: 'https://khayrullo-isomiddinov.github.io/mood-lens/',
     techStack: ['React', 'Node.js', 'AI / ML APIs'],
@@ -396,9 +426,9 @@ const minorProjects = [
     id: 101,
     title: 'Knights Game',
     description:
-      'A Java Swing strategy game on an NxN grid where two white and two black knights paint tiles with their colour. The first player to form four connected tiles in a line wins.',
+      'A two-player Java Swing game where knights move in chess patterns, paint tiles as they go, and race to connect four in a line.',
     longDescription:
-      'Knights Game is a Java Swing application implementing a turn-based "Knight Tournament" strategy game. Two white and two black knights move in legal chess-knight patterns, painting tiles with their colour. The goal is to form four connected painted tiles in a line. The project includes full turn-based logic, win detection, move validation, and a resizable GUI with interactive controls. It demonstrates object-oriented Java, Swing GUI programming, event-driven design, and game state management.',
+      'Knights Game is a turn-based strategy game built with Java Swing. Two players each control two knights — white and black — and take turns moving them in legal chess-knight patterns. Every tile a knight lands on gets painted its colour. The goal is to connect four of your painted tiles in a line before the other player does. It\'s clean and compact, with full move validation, win detection, and a resizable GUI.',
     repoLink: 'https://github.com/khayrullo-isomiddinov',
     liveLink: '#',
     techStack: ['Java', 'Swing', 'OOP', 'Event-Driven Design'],
@@ -477,7 +507,7 @@ const Projects = () => {
               onClick={() => open(project)}
               whileTap={{ scale: 0.99 }}
             >
-              <CardImage imageUrl={project.imageUrl} />
+              <CardImage imageUrl={project.imageUrl} gradient={project.gradient} />
               <CardBody>
                 <CardTitle>{project.title}</CardTitle>
                 <CardDesc>{project.description}</CardDesc>
@@ -516,7 +546,7 @@ const Projects = () => {
                 onClick={() => open(project)}
                 whileTap={{ scale: 0.99 }}
               >
-                <CardImage imageUrl={project.imageUrl} />
+                <CardImage imageUrl={project.imageUrl} gradient={project.gradient} />
                 <CardBody>
                   <CardTitle>{project.title}</CardTitle>
                   <CardDesc>{project.description}</CardDesc>
@@ -552,7 +582,7 @@ const Projects = () => {
                 <FiX size={18} />
               </CloseBtn>
 
-              <ModalImageWrapper imageUrl={selected.imageUrl} />
+              <ModalImageWrapper imageUrl={selected.imageUrl} gradient={selected.gradient} />
 
               <ModalBody>
                 <ModalTitle>{selected.title}</ModalTitle>

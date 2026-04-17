@@ -214,7 +214,7 @@ function Header({ isDark, setIsDark }) {
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     if (el) {
-      const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 80;
+      const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 72;
       window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
     setMenuOpen(false);

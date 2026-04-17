@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
 import { FiArrowRight, FiDownload } from 'react-icons/fi';
 import { useLang } from '../context/AppContext';
@@ -33,7 +33,7 @@ const HeroSection = styled.section`
   overflow: hidden;
 `;
 
-const DotGrid = styled.div`
+const DotGrid = styled(motion.div)`
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
@@ -45,7 +45,7 @@ const DotGrid = styled.div`
   z-index: 0;
 `;
 
-const GlowBlob = styled.div`
+const GlowBlob = styled(motion.div)`
   position: absolute;
   top: -10%;
   left: -5%;
@@ -59,7 +59,7 @@ const GlowBlob = styled.div`
   z-index: 0;
 `;
 
-const GlowBlobRight = styled.div`
+const GlowBlobRight = styled(motion.div)`
   position: absolute;
   top: 10%;
   right: -8%;
@@ -339,11 +339,19 @@ const Hero = () => {
   const { lang } = useLang();
   const t = copy[lang];
 
+  const { scrollY } = useScroll();
+  // Background elements move slower → feel further away
+  const dotY   = useTransform(scrollY, [0, 800], [0, 200]);
+  const blob1Y = useTransform(scrollY, [0, 800], [0, 120]);
+  const blob2Y = useTransform(scrollY, [0, 800], [0, 160]);
+  // Code card drifts up slightly faster → feels closer
+  const codeParallaxY = useTransform(scrollY, [0, 800], [0, -30]);
+
   return (
     <HeroSection id="hero">
-      <DotGrid />
-      <GlowBlob />
-      <GlowBlobRight />
+      <DotGrid style={{ y: dotY }} />
+      <GlowBlob style={{ y: blob1Y }} />
+      <GlowBlobRight style={{ y: blob2Y }} />
 
       <HeroGrid variants={container} initial="hidden" animate="visible">
 
@@ -370,7 +378,7 @@ const Hero = () => {
         </TextSide>
 
         {/* ── Right: floating code card ── */}
-        <CodeCardWrap variants={cardReveal}>
+        <CodeCardWrap variants={cardReveal} style={{ y: codeParallaxY }}>
           <CodeCard>
             <CardChrome>
               <Dot $color="#ff5f57" />
