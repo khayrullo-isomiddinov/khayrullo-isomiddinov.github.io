@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { FiMenu, FiX } from 'react-icons/fi';
+import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { useLang } from '../context/AppContext';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -31,6 +32,12 @@ const Logo = styled(motion.div)`
   cursor: pointer;
 `;
 
+const RightGroup = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+`;
+
 const NavLinks = styled.nav`
   display: flex;
   gap: 2rem;
@@ -58,15 +65,54 @@ const NavLinks = styled.nav`
 
     &:hover {
       color: ${({ theme }) => theme.colors.accent};
-      
-      &::after {
-        width: 100%;
-      }
+      &::after { width: 100%; }
     }
   }
 
-  @media (max-width: 768px) {
-    display: none;
+  @media (max-width: 768px) { display: none; }
+`;
+
+const IconBtn = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.borderAccent};
+    background: ${({ theme }) => theme.colors.accentDim};
+  }
+`;
+
+const LangToggle = styled(motion.button)`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background: transparent;
+  color: ${({ theme }) => theme.colors.textSecondary};
+  font-family: ${({ theme }) => theme.fonts.mono};
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.borderAccent};
+    background: ${({ theme }) => theme.colors.accentDim};
   }
 `;
 
@@ -79,14 +125,8 @@ const HamburgerMenu = styled.button`
   color: ${({ theme }) => theme.colors.text};
   padding: 0.5rem;
   transition: color 0.3s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
-
-  @media (max-width: 768px) {
-    display: block;
-  }
+  &:hover { color: ${({ theme }) => theme.colors.accent}; }
+  @media (max-width: 768px) { display: block; }
 `;
 
 const MobileMenu = styled(motion.nav)`
@@ -115,10 +155,7 @@ const CloseButton = styled.button`
   color: ${({ theme }) => theme.colors.text};
   padding: 0.5rem;
   transition: color 0.3s ease;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
+  &:hover { color: ${({ theme }) => theme.colors.accent}; }
 `;
 
 const MobileNavLink = styled.a`
@@ -130,10 +167,7 @@ const MobileNavLink = styled.a`
   padding: 0.75rem 0;
   transition: color 0.3s ease;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.accent};
-  }
+  &:hover { color: ${({ theme }) => theme.colors.accent}; }
 `;
 
 const ProgressBar = styled(motion.div)`
@@ -159,38 +193,31 @@ const Overlay = styled(motion.div)`
   backdrop-filter: blur(2px);
 `;
 
-function Header() {
+const navEn = ['Home', 'About', 'Experience', 'Projects', 'Contact'];
+const navUz = ['Bosh sahifa', 'Haqida', 'Tajriba', 'Loyihalar', 'Aloqa'];
+const navIds = ['hero', 'about', 'experience', 'projects', 'contact'];
+
+function Header({ isDark, setIsDark }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
+  const { lang, setLang } = useLang();
+
+  const navLabels = lang === 'uz' ? navUz : navEn;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleScroll = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    const el = document.getElementById(id);
+    if (el) {
+      const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
     setMenuOpen(false);
-  };
-
-  const mobileMenuVariants = {
-    hidden: { x: '100%' },
-    visible: { x: 0 },
-    exit: { x: '100%' }
   };
 
   return (
@@ -202,18 +229,38 @@ function Header() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          KI
+          HARRY
         </Logo>
+
         <NavLinks>
-          <a onClick={() => handleScroll('hero')}>Home</a>
-          <a onClick={() => handleScroll('about')}>About</a>
-          <a onClick={() => handleScroll('experience')}>Experience</a>
-          <a onClick={() => handleScroll('projects')}>Projects</a>
-          <a onClick={() => handleScroll('contact')}>Contact</a>
+          {navLabels.map((label, i) => (
+            <a key={navIds[i]} onClick={() => handleScroll(navIds[i])}>{label}</a>
+          ))}
         </NavLinks>
-        <HamburgerMenu onClick={() => setMenuOpen(true)}>
-          <FiMenu />
-        </HamburgerMenu>
+
+        <RightGroup>
+          <LangToggle
+            onClick={() => setLang(lang === 'en' ? 'uz' : 'en')}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            title="Toggle language"
+          >
+            {lang === 'en' ? 'UZ' : 'EN'}
+          </LangToggle>
+
+          <IconBtn
+            onClick={() => setIsDark(!isDark)}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.94 }}
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {isDark ? <FiSun size={15} /> : <FiMoon size={15} />}
+          </IconBtn>
+
+          <HamburgerMenu onClick={() => setMenuOpen(true)}>
+            <FiMenu />
+          </HamburgerMenu>
+        </RightGroup>
       </HeaderContainer>
 
       <AnimatePresence>
@@ -226,20 +273,17 @@ function Header() {
               onClick={() => setMenuOpen(false)}
             />
             <MobileMenu
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={mobileMenuVariants}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
-              <CloseButton onClick={() => setMenuOpen(false)}>
-                <FiX />
-              </CloseButton>
-              <MobileNavLink onClick={() => handleScroll('hero')}>Home</MobileNavLink>
-              <MobileNavLink onClick={() => handleScroll('about')}>About</MobileNavLink>
-              <MobileNavLink onClick={() => handleScroll('experience')}>Experience</MobileNavLink>
-              <MobileNavLink onClick={() => handleScroll('projects')}>Projects</MobileNavLink>
-              <MobileNavLink onClick={() => handleScroll('contact')}>Contact</MobileNavLink>
+              <CloseButton onClick={() => setMenuOpen(false)}><FiX /></CloseButton>
+              {navLabels.map((label, i) => (
+                <MobileNavLink key={navIds[i]} onClick={() => handleScroll(navIds[i])}>
+                  {label}
+                </MobileNavLink>
+              ))}
             </MobileMenu>
           </>
         )}
