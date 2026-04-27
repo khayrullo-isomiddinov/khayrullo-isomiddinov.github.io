@@ -423,6 +423,18 @@ const myProjects = [
 
 const minorProjects = [
   {
+    id: 102,
+    title: 'CLF-02 Flashcards',
+    description:
+      'An Anki-style flashcard app for prepping the AWS CLF-02 exam — flip through cards, track what you know, and drill the gaps.',
+    longDescription:
+      'A straightforward flashcard app built for grinding the AWS Cloud Practitioner (CLF-02) exam. It mimics the Anki flow — you see the question, think through your answer, flip the card, then mark yourself right or wrong. It\'s live on Render and covers the key CLF-02 topics so you can study anywhere without needing a full deck tool.',
+    repoLink: 'https://github.com/khayrullo-isomiddinov/clf-02-flashcards-app',
+    liveLink: 'https://clf-02-flashcards-app.onrender.com/',
+    techStack: ['JavaScript', 'HTML', 'CSS'],
+    imageUrl: new URL('../assets/images/flashcard.png', import.meta.url).href,
+  },
+  {
     id: 101,
     title: 'Knights Game',
     description:
