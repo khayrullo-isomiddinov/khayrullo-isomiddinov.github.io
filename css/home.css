@@ -91,13 +91,23 @@
 .hero-section__social {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  padding: 11px;
+  margin: -11px;
   color: var(--dark-silver);
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.15s ease;
 }
 
-.hero-section__social:hover {
+.hero-section__social:active {
   color: var(--metallic-black);
+  transform: scale(0.9);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-section__social:hover {
+    color: var(--metallic-black);
+  }
 }
 
 .hero-section__social svg {
@@ -131,6 +141,7 @@
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 990 / 1350;
   transform: translateY(var(--parallax-offset, 0px));
   will-change: transform;
 }
@@ -234,9 +245,15 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.project-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(11, 11, 11, 0.1);
+.project-card:active {
+  transform: scale(0.985);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(11, 11, 11, 0.1);
+  }
 }
 
 .project-card::before {
@@ -248,8 +265,10 @@
   transition: background-color 0.2s ease;
 }
 
-.project-card:hover::before {
-  background-color: var(--metallic-black);
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover::before {
+    background-color: var(--metallic-black);
+  }
 }
 
 .project-card__content {
@@ -306,15 +325,23 @@
   color: var(--metallic-black);
   min-width: 80px;
   padding-inline: 10px;
-  padding-block: 4px;
+  padding-block: 7px;
   border: 1px solid var(--metallic-black-transparent);
   transition: background-color 0.2s ease, color 0.2s ease, font-weight 0.2s ease;
 }
 
-.project-card__btn:hover {
+.project-card__btn:active {
   background-color: var(--metallic-black);
   color: var(--kawaii-silver);
   font-weight: 400;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card__btn:hover {
+    background-color: var(--metallic-black);
+    color: var(--kawaii-silver);
+    font-weight: 400;
+  }
 }
 
 /* ============================================================
