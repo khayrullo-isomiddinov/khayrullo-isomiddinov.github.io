@@ -10,8 +10,8 @@
 
   function update() {
     var y = Math.min(window.scrollY, cap);
-    portrait.style.setProperty('--parallax-offset', (y * 0.06).toFixed(2) + 'px');
-    if (name) name.style.setProperty('--parallax-offset', (y * 0.03).toFixed(2) + 'px');
+    portrait.style.setProperty('--parallax-offset', (y * 0.14).toFixed(2) + 'px');
+    if (name) name.style.setProperty('--parallax-offset', (y * 0.07).toFixed(2) + 'px');
     ticking = false;
   }
 
