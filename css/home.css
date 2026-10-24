@@ -214,19 +214,6 @@
   text-align: left;
 }
 
-.projects-section__more {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  font-size: 0.875rem;
-  letter-spacing: 0.02em;
-  color: var(--metallic-black);
-  text-align: left;
-}
-
-.projects-section__more a {
-  text-decoration: underline;
-}
-
 /* ============================================================
    PROJECT CARD
    ============================================================ */

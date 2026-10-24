@@ -23,7 +23,7 @@
         "subtitle": "from Namangan, Uzbekistan.",
         "scroll": "projects",
         "projects": {
-            "title": "Things I've built",
+            "title": "What defines me",
             "list": [
                 {
                     "name": "PeerPrep",
@@ -192,8 +192,7 @@
                         }
                     ]
                 }
-            ],
-            "more": "Not enough? Check my <a href=\"/assets/docs/cv_khayrullo_isomiddinov.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">CV</a>."
+            ]
         }
     }
 }
