@@ -318,7 +318,7 @@
     --hero-portrait-min-height-landscape: 450px;
     --hero-portrait-overflow-top: 42px;
     --hero-portrait-padding-inline: 70px;
-    --hero-portrait-aspect-ratio: 0.7932;
+    --hero-portrait-aspect-ratio: 0.6667;
     --hero-portrait-name-right-limit: clamp(-135px, -10.47svh, -47px);
     --hero-portrait-name-screen-margin: 40px;
     --hero-info-lang-offset: 0px;
