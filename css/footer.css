@@ -1,0 +1,41 @@
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  --footer-padding-block-end: 25px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  padding-block-end: var(--footer-padding-block-end);
+}
+
+.site-footer__content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.site-footer__divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--metallic-black-transparent);
+}
+
+.site-footer__quote {
+  font-size: 0.7rem;
+  font-weight: 200;
+  font-style: italic;
+  color: var(--metallic-black);
+  text-align: center;
+}
+
+.site-footer__copyright {
+  font-size: 0.8rem;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--metallic-black);
+  text-align: center;
+}

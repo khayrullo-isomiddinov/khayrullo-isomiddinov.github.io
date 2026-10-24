@@ -1,0 +1,148 @@
+{
+    "notFound": {
+        "title": "Page not found",
+        "cta": "Go back home"
+    },
+    "status": {
+        "cta": "Go back home",
+        "500": {
+            "title": "Something went wrong.",
+            "desc": "I'm on it. Please try again in a moment."
+        }
+    },
+    "meta": {
+        "homeTitle": "Khayrullo Isomiddinov",
+        "home": "Software engineer based in Budapest. I build real-time platforms, full-stack applications, and tools that people actually use."
+    },
+    "footer": {
+        "quote": "\"Code is read far more often than it is written.\"",
+        "copyright": "© 2026 Khayrullo Isomiddinov."
+    },
+    "home": {
+        "title": "Building software<br class=\"br-tablet-landscape\"> that matters",
+        "subtitle": "from Budapest, Hungary.",
+        "scroll": "projects",
+        "projects": {
+            "title": "Things I've built",
+            "list": [
+                {
+                    "name": "PeerPrep",
+                    "description": "A real-time study platform where students form groups, chat live, and get AI help writing their event posts. Built with FastAPI and React.",
+                    "buttons": [
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/PeerPrep"
+                        }
+                    ]
+                },
+                {
+                    "name": "Polaris LMS",
+                    "description": "A learning management system where teachers post assignments, students submit work, and everyone gets their own dashboard. Built on Laravel.",
+                    "buttons": [
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/polarisLMS"
+                        }
+                    ]
+                },
+                {
+                    "name": "Erasmus+ Mobility Portal",
+                    "description": "The live course selection portal for incoming Erasmus+ students at the University of Split. Deployed and actively used by real exchange students every semester.",
+                    "buttons": [
+                        {
+                            "label": "Site",
+                            "href": "https://unisplit-mobility.onrender.com"
+                        }
+                    ]
+                },
+                {
+                    "name": "Transport Tycoon",
+                    "description": "A JavaFX desktop game where you build road and rail networks, dispatch buses and trains, and try to run a profitable transport company.",
+                    "buttons": [
+                        {
+                            "label": "Code",
+                            "href": "https://szofttech.inf.elte.hu/software-technology-2026/group-12/team-404"
+                        }
+                    ]
+                },
+                {
+                    "name": "Stargate Game",
+                    "description": "A browser multiplayer game where players move around a shared grid and race to collect the most debris. No frameworks, just plain JavaScript.",
+                    "buttons": [
+                        {
+                            "label": "Play",
+                            "href": "https://khayrullo.com/Stargate-Game/"
+                        },
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/Stargate-Game"
+                        }
+                    ]
+                },
+                {
+                    "name": "Booklovers Hub",
+                    "description": "A social platform for readers: follow friends, share books, write reviews, and build your personal collection. Built with Laravel.",
+                    "buttons": [
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/booklovers-hub"
+                        }
+                    ]
+                },
+                {
+                    "name": "Comment Remover",
+                    "description": "A published VS Code extension that strips comments from source files across seven languages. Thousands of downloads on the Marketplace.",
+                    "buttons": [
+                        {
+                            "label": "Marketplace",
+                            "href": "https://marketplace.visualstudio.com/items?itemName=KhayrulloIsomiddinov.khayrullo-comment-remover"
+                        },
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/comment-remover-vscode-ext"
+                        }
+                    ]
+                },
+                {
+                    "name": "MoodLens",
+                    "description": "An AR app that reads facial expressions and tone of voice in real time, then uses AI to reflect back how you're feeling.",
+                    "buttons": [
+                        {
+                            "label": "Live",
+                            "href": "https://khayrullo-isomiddinov.github.io/mood-lens/"
+                        },
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/mood-lens"
+                        }
+                    ]
+                },
+                {
+                    "name": "CLF-02 Flashcards",
+                    "description": "An Anki-style flashcard app for prepping the AWS CLF-02 exam. Flip through cards, track what you know, drill the gaps.",
+                    "buttons": [
+                        {
+                            "label": "Live",
+                            "href": "https://clf-02-flashcards-app.onrender.com/"
+                        },
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov/clf-02-flashcards-app"
+                        }
+                    ]
+                },
+                {
+                    "name": "Knights Game",
+                    "description": "A two-player Java Swing game where knights move in chess patterns, paint tiles as they go, and race to connect four in a line.",
+                    "buttons": [
+                        {
+                            "label": "Code",
+                            "href": "https://github.com/khayrullo-isomiddinov"
+                        }
+                    ]
+                }
+            ],
+            "more": "Not enough? Check my <a href=\"/assets/docs/cv_khayrullo_isomiddinov.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">CV</a>."
+        }
+    }
+}

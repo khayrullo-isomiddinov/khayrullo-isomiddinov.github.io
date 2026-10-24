@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--#include "/partials/head.html"-->
+  <meta name="description" content="" data-i18n="meta.home">
+  <meta property="og:title" content="" data-i18n="meta.homeTitle">
+  <meta property="og:description" content="" data-i18n="meta.home">
+  <title data-i18n="meta.homeTitle"></title>
+  <link rel="stylesheet" href="/css/footer.min.css">
+  <link rel="stylesheet" href="/css/home.min.css">
+</head>
+<body>
+
+<!--#include "/partials/icons.html"-->
+
+<div class="above-fold">
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-section__info">
+        <div class="hero-section__text">
+          <h1 data-i18n="home.title"></h1>
+          <p data-i18n="home.subtitle"></p>
+        </div>
+        <div class="hero-section__socials">
+          <a class="hero-section__social" href="mailto:khayrullo2@outlook.com" aria-label="Email">
+            <svg viewBox="0 0 19 15" aria-hidden="true"><use href="#icon-email"></use></svg>
+          </a>
+          <a class="hero-section__social" href="https://www.linkedin.com/in/khayrullo-isomiddinov/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <svg viewBox="0 0 14 15" aria-hidden="true"><use href="#icon-linkedin"></use></svg>
+          </a>
+          <a class="hero-section__social" href="https://github.com/khayrullo-isomiddinov" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 16 15" aria-hidden="true"><use href="#icon-github"></use></svg>
+          </a>
+          <a class="hero-section__social" href="https://instagram.com/khayrulloismdnv" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 15 15" aria-hidden="true"><use href="#icon-instagram"></use></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-section__portrait-wrap">
+      <p class="hero-section__portrait-name">Khayrullo<br>Isomiddinov</p>
+      <img class="hero-section__portrait" src="/assets/images/portrait.webp" alt="Khayrullo Isomiddinov">
+    </div>
+    <div class="container">
+      <a class="hero-section__scroll" href="#projects" aria-label="Scroll to projects">
+        <span data-i18n="home.scroll"></span>
+        <svg aria-hidden="true"><use href="#icon-arrow-down"></use></svg>
+      </a>
+    </div>
+  </section>
+</div>
+
+  <main>
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <h2 class="projects-section__title" data-i18n="home.projects.title"></h2>
+        <ul class="projects-list" data-i18n-list="home.projects.list">
+          <template data-i18n-list-item>
+            <li class="project-card">
+              <div class="project-card__content">
+                <h3 class="project-card__name" data-i18n-field="name"></h3>
+                <p class="project-card__description" data-i18n-field="description"></p>
+                <div class="project-card__buttons" data-i18n-list="buttons">
+                  <template data-i18n-list-item>
+                    <a class="project-card__btn" data-i18n-field-href="href" target="_blank" rel="noopener noreferrer" data-i18n-field="label"></a>
+                  </template>
+                </div>
+              </div>
+            </li>
+          </template>
+        </ul>
+        <p class="projects-section__more" data-i18n="home.projects.more"></p>
+      </div>
+    </section>
+  </main>
+
+<!--#include "/partials/footer.html"-->
+
+</body>
+</html>
