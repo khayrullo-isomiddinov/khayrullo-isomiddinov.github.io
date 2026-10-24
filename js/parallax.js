@@ -1,5 +1,8 @@
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Below 1024px the portrait sits flush against the bottom of the hero
+  // section with no room to drift without bleeding into the next section.
+  if (!window.matchMedia('(min-width: 1024px)').matches) return;
 
   var portrait = document.querySelector('.hero-section__portrait');
   var name = document.querySelector('.hero-section__portrait-name');

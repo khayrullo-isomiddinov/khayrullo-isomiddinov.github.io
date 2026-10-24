@@ -4,10 +4,10 @@
 :root {
   --projects-padding-block-start: 60px;
   --projects-padding-block-end: 30px;
-  --hero-portrait-padding-inline: 20px;
+  --hero-portrait-padding-inline: 0px;
   --hero-portrait-offset: 20px;
   --hero-portrait-min-width: 300px;
-  --hero-portrait-max-width: 500px;
+  --hero-portrait-max-width: 560px;
   --hero-portrait-name-right: 0px;
   --hero-portrait-name-right-limit: -85px;
   --hero-portrait-name-screen-margin: 10px;
@@ -124,7 +124,6 @@
   min-width: var(--hero-portrait-min-width);
   max-width: var(--hero-portrait-max-width);
   position: relative;
-  transform: translateY(clamp(-70px, -9svh, -30px));
 }
 
 .hero-section__portrait-wrap::after {
@@ -162,7 +161,7 @@
   letter-spacing: 0.01em;
   text-align: right;
   color: var(--kawaii-silver);
-  mix-blend-mode: difference;
+  text-shadow: 0 2px 18px rgba(11, 11, 11, 0.6);
   pointer-events: none;
   z-index: 1;
   transform: translateY(var(--parallax-offset, 0px));
@@ -386,7 +385,6 @@
     min-width: unset;
     max-width: calc(100% - 2 * var(--hero-portrait-padding-inline));
     margin-inline: auto;
-    transform: none;
   }
 
   .hero-section__portrait {
@@ -438,6 +436,8 @@
       clamp(var(--hero-portrait-name-right-limit), calc(var(--container-padding-inline) - (100vw - var(--hero-portrait-max-width)) / 2), var(--hero-portrait-name-right)),
       calc(var(--hero-portrait-name-screen-margin) - max(var(--hero-portrait-padding-inline), (100vw - var(--hero-portrait-aspect-ratio) * max(100svh, var(--hero-portrait-min-height-landscape))) / 2))
     );
+    mix-blend-mode: difference;
+    text-shadow: none;
   }
 }
 
