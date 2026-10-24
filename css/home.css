@@ -148,15 +148,7 @@
   letter-spacing: 0.01em;
   text-align: right;
   color: var(--kawaii-silver);
-  text-shadow:
-    -1.5px -1.5px 0 var(--cod-gray),
-    1.5px -1.5px 0 var(--cod-gray),
-    -1.5px 1.5px 0 var(--cod-gray),
-    1.5px 1.5px 0 var(--cod-gray),
-    0 -1.5px 0 var(--cod-gray),
-    0 1.5px 0 var(--cod-gray),
-    -1.5px 0 0 var(--cod-gray),
-    1.5px 0 0 var(--cod-gray);
+  mix-blend-mode: difference;
   pointer-events: none;
   z-index: 1;
 }
@@ -429,8 +421,6 @@
       clamp(var(--hero-portrait-name-right-limit), calc(var(--container-padding-inline) - (100vw - var(--hero-portrait-max-width)) / 2), var(--hero-portrait-name-right)),
       calc(var(--hero-portrait-name-screen-margin) - max(var(--hero-portrait-padding-inline), (100vw - var(--hero-portrait-aspect-ratio) * max(100svh, var(--hero-portrait-min-height-landscape))) / 2))
     );
-    mix-blend-mode: difference;
-    text-shadow: none;
   }
 }
 
