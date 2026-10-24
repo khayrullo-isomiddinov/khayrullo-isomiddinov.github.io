@@ -148,8 +148,15 @@
   letter-spacing: 0.01em;
   text-align: right;
   color: var(--kawaii-silver);
-  -webkit-text-stroke: 1.5px var(--cod-gray);
-  paint-order: stroke fill;
+  text-shadow:
+    -1.5px -1.5px 0 var(--cod-gray),
+    1.5px -1.5px 0 var(--cod-gray),
+    -1.5px 1.5px 0 var(--cod-gray),
+    1.5px 1.5px 0 var(--cod-gray),
+    0 -1.5px 0 var(--cod-gray),
+    0 1.5px 0 var(--cod-gray),
+    -1.5px 0 0 var(--cod-gray),
+    1.5px 0 0 var(--cod-gray);
   pointer-events: none;
   z-index: 1;
 }
@@ -423,7 +430,7 @@
       calc(var(--hero-portrait-name-screen-margin) - max(var(--hero-portrait-padding-inline), (100vw - var(--hero-portrait-aspect-ratio) * max(100svh, var(--hero-portrait-min-height-landscape))) / 2))
     );
     mix-blend-mode: difference;
-    -webkit-text-stroke: 0;
+    text-shadow: none;
   }
 }
 
