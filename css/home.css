@@ -124,6 +124,7 @@
   min-width: var(--hero-portrait-min-width);
   max-width: var(--hero-portrait-max-width);
   position: relative;
+  transform: translateY(clamp(-70px, -9svh, -30px));
 }
 
 .hero-section__portrait-wrap::after {
@@ -385,6 +386,7 @@
     min-width: unset;
     max-width: calc(100% - 2 * var(--hero-portrait-padding-inline));
     margin-inline: auto;
+    transform: none;
   }
 
   .hero-section__portrait {
