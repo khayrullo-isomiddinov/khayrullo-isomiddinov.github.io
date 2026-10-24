@@ -126,17 +126,6 @@
   position: relative;
 }
 
-.hero-section__portrait-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 10px;
-  background: linear-gradient(to bottom, transparent, var(--kawaii-silver));
-  pointer-events: none;
-}
-
 .hero-section__portrait {
   display: block;
   width: 100%;
@@ -154,12 +143,13 @@
   font-family: var(--font-serif);
   font-weight: 600;
   font-style: normal;
-  font-size: clamp(3.5rem, 17.35vw, 7.25rem);
+  font-size: clamp(3rem, 14.5vw, 6rem);
   line-height: 0.9;
   letter-spacing: 0.01em;
   text-align: right;
   color: var(--kawaii-silver);
-  text-shadow: 0 2px 18px rgba(11, 11, 11, 0.6);
+  -webkit-text-stroke: 1.5px var(--cod-gray);
+  paint-order: stroke fill;
   pointer-events: none;
   z-index: 1;
 }
@@ -433,7 +423,7 @@
       calc(var(--hero-portrait-name-screen-margin) - max(var(--hero-portrait-padding-inline), (100vw - var(--hero-portrait-aspect-ratio) * max(100svh, var(--hero-portrait-min-height-landscape))) / 2))
     );
     mix-blend-mode: difference;
-    text-shadow: none;
+    -webkit-text-stroke: 0;
   }
 }
 
