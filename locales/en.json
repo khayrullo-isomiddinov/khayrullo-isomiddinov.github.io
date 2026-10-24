@@ -20,7 +20,7 @@
     },
     "home": {
         "title": "Building software<br class=\"br-tablet-landscape\"> that matters",
-        "subtitle": "from Budapest, Hungary.",
+        "subtitle": "from Namangan, Uzbekistan.",
         "scroll": "projects",
         "projects": {
             "title": "Things I've built",
@@ -28,6 +28,12 @@
                 {
                     "name": "PeerPrep",
                     "description": "A real-time study platform where students form groups, chat live, and get AI help writing their event posts. Built with FastAPI and React.",
+                    "tags": [
+                        {"label": "FastAPI"},
+                        {"label": "React 19"},
+                        {"label": "WebSockets"},
+                        {"label": "JWT Auth"}
+                    ],
                     "buttons": [
                         {
                             "label": "Code",
@@ -38,6 +44,11 @@
                 {
                     "name": "Polaris LMS",
                     "description": "A learning management system where teachers post assignments, students submit work, and everyone gets their own dashboard. Built on Laravel.",
+                    "tags": [
+                        {"label": "Laravel 12"},
+                        {"label": "Blade"},
+                        {"label": "Tailwind CSS"}
+                    ],
                     "buttons": [
                         {
                             "label": "Code",
@@ -48,6 +59,11 @@
                 {
                     "name": "Erasmus+ Mobility Portal",
                     "description": "The live course selection portal for incoming Erasmus+ students at the University of Split. Deployed and actively used by real exchange students every semester.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "PHP"},
+                        {"label": "REST API"}
+                    ],
                     "buttons": [
                         {
                             "label": "Site",
@@ -58,6 +74,11 @@
                 {
                     "name": "Transport Tycoon",
                     "description": "A JavaFX desktop game where you build road and rail networks, dispatch buses and trains, and try to run a profitable transport company.",
+                    "tags": [
+                        {"label": "Java"},
+                        {"label": "JavaFX"},
+                        {"label": "Maven"}
+                    ],
                     "buttons": [
                         {
                             "label": "Code",
@@ -68,6 +89,11 @@
                 {
                     "name": "Stargate Game",
                     "description": "A browser multiplayer game where players move around a shared grid and race to collect the most debris. No frameworks, just plain JavaScript.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "HTML"},
+                        {"label": "CSS"}
+                    ],
                     "buttons": [
                         {
                             "label": "Play",
@@ -82,6 +108,11 @@
                 {
                     "name": "Booklovers Hub",
                     "description": "A social platform for readers: follow friends, share books, write reviews, and build your personal collection. Built with Laravel.",
+                    "tags": [
+                        {"label": "Laravel"},
+                        {"label": "MySQL"},
+                        {"label": "Blade"}
+                    ],
                     "buttons": [
                         {
                             "label": "Code",
@@ -92,6 +123,11 @@
                 {
                     "name": "Comment Remover",
                     "description": "A published VS Code extension that strips comments from source files across seven languages. Thousands of downloads on the Marketplace.",
+                    "tags": [
+                        {"label": "TypeScript"},
+                        {"label": "VS Code API"},
+                        {"label": "Node.js"}
+                    ],
                     "buttons": [
                         {
                             "label": "Marketplace",
@@ -106,6 +142,11 @@
                 {
                     "name": "MoodLens",
                     "description": "An AR app that reads facial expressions and tone of voice in real time, then uses AI to reflect back how you're feeling.",
+                    "tags": [
+                        {"label": "React"},
+                        {"label": "Node.js"},
+                        {"label": "AI / ML APIs"}
+                    ],
                     "buttons": [
                         {
                             "label": "Live",
@@ -120,6 +161,11 @@
                 {
                     "name": "CLF-02 Flashcards",
                     "description": "An Anki-style flashcard app for prepping the AWS CLF-02 exam. Flip through cards, track what you know, drill the gaps.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "HTML"},
+                        {"label": "CSS"}
+                    ],
                     "buttons": [
                         {
                             "label": "Live",
@@ -134,6 +180,11 @@
                 {
                     "name": "Knights Game",
                     "description": "A two-player Java Swing game where knights move in chess patterns, paint tiles as they go, and race to connect four in a line.",
+                    "tags": [
+                        {"label": "Java"},
+                        {"label": "Swing"},
+                        {"label": "OOP"}
+                    ],
                     "buttons": [
                         {
                             "label": "Code",

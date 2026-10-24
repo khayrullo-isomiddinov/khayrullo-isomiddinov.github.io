@@ -131,6 +131,8 @@
   display: block;
   width: 100%;
   height: auto;
+  transform: translateY(var(--parallax-offset, 0px));
+  will-change: transform;
 }
 
 .hero-section__portrait-name {
@@ -151,6 +153,8 @@
   mix-blend-mode: difference;
   pointer-events: none;
   z-index: 1;
+  transform: translateY(var(--parallax-offset, 0px));
+  will-change: transform;
 }
 
 .hero-section__scroll {
@@ -225,6 +229,14 @@
   display: flex;
   flex-direction: row;
   gap: 14px;
+  padding: 6px;
+  margin: -6px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(11, 11, 11, 0.1);
 }
 
 .project-card::before {
@@ -258,6 +270,21 @@
   font-weight: 400;
   font-size: 0.8rem;
   color: var(--metallic-black);
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-block-start: 2px;
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--dark-silver);
+}
+
+.project-card__tag + .project-card__tag::before {
+  content: '\00B7';
+  margin-inline: 6px;
 }
 
 .project-card__buttons {

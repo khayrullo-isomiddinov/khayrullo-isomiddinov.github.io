@@ -8,6 +8,7 @@
   <title data-i18n="meta.homeTitle"></title>
   <link rel="stylesheet" href="/css/footer.min.css">
   <link rel="stylesheet" href="/css/home.min.css">
+  <script src="/js/parallax.min.js" defer></script>
 </head>
 <body>
 
@@ -60,6 +61,11 @@
               <div class="project-card__content">
                 <h3 class="project-card__name" data-i18n-field="name"></h3>
                 <p class="project-card__description" data-i18n-field="description"></p>
+                <div class="project-card__tags" data-i18n-list="tags">
+                  <template data-i18n-list-item>
+                    <span class="project-card__tag" data-i18n-field="label"></span>
+                  </template>
+                </div>
                 <div class="project-card__buttons" data-i18n-list="buttons">
                   <template data-i18n-list-item>
                     <a class="project-card__btn" data-i18n-field-href="href" target="_blank" rel="noopener noreferrer" data-i18n-field="label"></a>
