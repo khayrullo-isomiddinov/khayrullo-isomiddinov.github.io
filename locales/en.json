@@ -36,6 +36,10 @@
                     ],
                     "buttons": [
                         {
+                            "label": "Site",
+                            "href": "https://peer-prep-gamma.vercel.app/"
+                        },
+                        {
                             "label": "Code",
                             "href": "https://github.com/khayrullo-isomiddinov/PeerPrep"
                         }
