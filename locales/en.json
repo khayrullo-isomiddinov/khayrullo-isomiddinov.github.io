@@ -46,6 +46,25 @@
                     ]
                 },
                 {
+                    "name": "Transport Tycoon",
+                    "description": "A JavaFX desktop game where you build road and rail networks, dispatch buses and trains, and try to run a profitable transport company.",
+                    "tags": [
+                        {"label": "Java"},
+                        {"label": "JavaFX"},
+                        {"label": "Maven"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Play",
+                            "href": "https://khayrullo-isomiddinov.itch.io/mini-transport-tycoon-game"
+                        },
+                        {
+                            "label": "Code",
+                            "href": "https://szofttech.inf.elte.hu/software-technology-2026/group-12/team-404"
+                        }
+                    ]
+                },
+                {
                     "name": "Polaris LMS",
                     "description": "A learning management system where teachers post assignments, students submit work, and everyone gets their own dashboard. Built on Laravel.",
                     "tags": [
@@ -75,21 +94,7 @@
                         }
                     ]
                 },
-                {
-                    "name": "Transport Tycoon",
-                    "description": "A JavaFX desktop game where you build road and rail networks, dispatch buses and trains, and try to run a profitable transport company.",
-                    "tags": [
-                        {"label": "Java"},
-                        {"label": "JavaFX"},
-                        {"label": "Maven"}
-                    ],
-                    "buttons": [
-                        {
-                            "label": "Code",
-                            "href": "https://szofttech.inf.elte.hu/software-technology-2026/group-12/team-404"
-                        }
-                    ]
-                },
+        
                 {
                     "name": "Stargate Game",
                     "description": "A browser multiplayer game where players move around a shared grid and race to collect the most debris. No frameworks, just plain JavaScript.",
