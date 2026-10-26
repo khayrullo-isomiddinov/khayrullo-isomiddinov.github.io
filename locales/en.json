@@ -60,8 +60,13 @@
                         },
                         {
                             "label": "Code",
-                            "href": "https://szofttech.inf.elte.hu/software-technology-2026/group-12/team-404"
+                            "href": "https://github.com/khayrullo-isomiddinov/Transport-Tycoon"
+                        }, 
+                        {
+                            "label": "Windows Download",
+                            "href": "https://github.com/khayrullo-isomiddinov/Transport-Tycoon/releases/tag/v0.1.0"
                         }
+            
                     ]
                 },
                 {
