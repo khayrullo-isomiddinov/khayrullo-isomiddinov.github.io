@@ -200,10 +200,10 @@
 }
 
 .projects-section__more {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-weight: 400;
   font-size: 0.875rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   color: var(--metallic-black);
   text-align: left;
 }
