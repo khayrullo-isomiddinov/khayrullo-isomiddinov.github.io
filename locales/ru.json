@@ -204,7 +204,8 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "more": "Этого мало? Посмотрите моё <a href=\"/assets/docs/cv_khayrullo_isomiddinov.pdf\" target=\"_blank\" rel=\"noopener noreferrer\">резюме</a>."
         }
     }
 }
