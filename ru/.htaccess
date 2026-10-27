@@ -1,0 +1,2 @@
+ErrorDocument 404 /ru/404.html
+ErrorDocument 500 /ru/status.html?type=500

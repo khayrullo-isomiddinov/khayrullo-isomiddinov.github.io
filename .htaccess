@@ -7,9 +7,9 @@ RewriteCond %{SERVER_PORT} !=443
 RewriteRule ^(.*)$ https://khayrullo.com/$1 [R=301,L]
 
 # Language prefix routing — serve per-language static files
-RewriteRule ^(es|fr|ca)/?$ /$1/index.html [L]
+RewriteRule ^(es|fr|ca|ru)/?$ /$1/index.html [L]
 RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f
-RewriteRule ^(es|fr|ca)/([^.]+)$ /$1/$2.html [L]
+RewriteRule ^(es|fr|ca|ru)/([^.]+)$ /$1/$2.html [L]
 
 # Remove .html extension from URLs
 RewriteCond %{REQUEST_FILENAME} !-d
