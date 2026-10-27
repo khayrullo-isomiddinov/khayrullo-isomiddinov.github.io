@@ -180,7 +180,7 @@ http.createServer((req, res) => {
   let urlPath = req.url.split('?')[0];
 
   // Detect language from URL prefix; default to 'en'
-  const langMatch = urlPath.match(/^\/(es|fr|ca)(\/|$)/);
+  const langMatch = urlPath.match(/^\/(es|fr|ca|ru)(\/|$)/);
   const lang = langMatch ? langMatch[1] : 'en';
   urlPath = langMatch ? urlPath.replace(langMatch[0], '/') : urlPath;
 

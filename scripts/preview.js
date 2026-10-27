@@ -43,7 +43,7 @@ http.createServer((req, res) => {
   const ext = path.extname(filePath).toLowerCase();
   const mimeType = MIME[ext] || 'application/octet-stream';
 
-  const langMatch = req.url.split('?')[0].match(/^\/(es|fr|ca)\b/);
+  const langMatch = req.url.split('?')[0].match(/^\/(es|fr|ca|ru)\b/);
   const lang = langMatch ? langMatch[1] : 'en';
 
   fs.readFile(filePath, (err, data) => {

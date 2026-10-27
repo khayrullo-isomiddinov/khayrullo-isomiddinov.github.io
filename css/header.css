@@ -1,0 +1,43 @@
+/* ============================================================
+   CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  --header-padding-block-start: 28px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  padding-block-start: var(--header-padding-block-start);
+}
+
+.lang-selector {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+}
+
+.lang-selector a {
+  font-weight: 400;
+  color: var(--metallic-black);
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.lang-selector a:hover {
+  color: var(--cod-gray);
+}
+
+.lang-selector a[aria-current="true"] {
+  font-weight: 700;
+  color: var(--cod-gray);
+  pointer-events: none;
+  cursor: default;
+}
+
+.lang-selector span {
+  color: var(--dark-silver);
+}

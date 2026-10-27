@@ -273,7 +273,7 @@ async function build() {
     .map(file => `RewriteRule ^${path.basename(file, '.html')}/?$ /${path.basename(file, '.html')}.html [L]`)
     .join('\n');
   const conflictSection = conflictRules ? `# Pages where a same-name directory also exists\n${conflictRules}\n\n` : '';
-  const rootHtaccess = `Options -Indexes\n\nRewriteEngine On\n\n${httpsRedirect}# Language prefix routing — serve per-language static files\nRewriteRule ^(es|fr|ca)/?$ /$1/index.html [L]\nRewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f\nRewriteRule ^(es|fr|ca)/([^.]+)$ /$1/$2.html [L]\n\n${conflictSection}# Remove .html extension from URLs\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteCond %{REQUEST_FILENAME}\\.html -f\nRewriteRule ^([^\\.]+)$ $1.html [NC,L]\n\n# Custom error pages\nErrorDocument 404 /404.html\nErrorDocument 500 /status.html?type=500\n`;
+  const rootHtaccess = `Options -Indexes\n\nRewriteEngine On\n\n${httpsRedirect}# Language prefix routing — serve per-language static files\nRewriteRule ^(es|fr|ca|ru)/?$ /$1/index.html [L]\nRewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f\nRewriteRule ^(es|fr|ca|ru)/([^.]+)$ /$1/$2.html [L]\n\n${conflictSection}# Remove .html extension from URLs\nRewriteCond %{REQUEST_FILENAME} !-d\nRewriteCond %{REQUEST_FILENAME}\\.html -f\nRewriteRule ^([^\\.]+)$ $1.html [NC,L]\n\n# Custom error pages\nErrorDocument 404 /404.html\nErrorDocument 500 /status.html?type=500\n`;
   fs.writeFileSync(path.join(DIST, '.htaccess'), rootHtaccess);
   console.log('  [htaccess] .htaccess');
   for (const lang of LOCALES.filter(l => l !== DEFAULT_LOCALE)) {

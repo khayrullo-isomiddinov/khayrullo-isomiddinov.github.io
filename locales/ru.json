@@ -1,0 +1,210 @@
+{
+    "notFound": {
+        "title": "Страница не найдена",
+        "cta": "Вернуться на главную"
+    },
+    "status": {
+        "cta": "Вернуться на главную",
+        "500": {
+            "title": "Что-то пошло не так.",
+            "desc": "Уже разбираюсь. Попробуйте снова через минуту."
+        }
+    },
+    "meta": {
+        "homeTitle": "Khayrullo Isomiddinov",
+        "home": "Инженер-программист из Будапешта. Создаю платформы реального времени, full-stack приложения и инструменты, которыми люди действительно пользуются."
+    },
+    "footer": {
+        "quote": "«Код читают гораздо чаще, чем пишут.»",
+        "copyright": "© 2026 Khayrullo Isomiddinov."
+    },
+    "home": {
+        "title": "Создаю программы,<br class=\"br-tablet-landscape\"> которые имеют значение",
+        "subtitle": "из Узбекистана.",
+        "scroll": "проекты",
+        "projects": {
+            "title": "Что меня определяет",
+            "list": [
+                {
+                    "name": "PeerPrep",
+                    "description": "Платформа для учёбы в реальном времени, где студенты создают группы, общаются в чате и получают помощь ИИ при написании постов о мероприятиях. Построена на FastAPI и React.",
+                    "tags": [
+                        {"label": "FastAPI"},
+                        {"label": "React 19"},
+                        {"label": "WebSockets"},
+                        {"label": "JWT Auth"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Сайт",
+                            "href": "https://peer-prep-gamma.vercel.app/"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/PeerPrep"
+                        }
+                    ]
+                },
+                {
+                    "name": "Transport Tycoon",
+                    "description": "Настольная игра на JavaFX, в которой вы строите автомобильные и железные дороги, отправляете автобусы и поезда и пытаетесь сделать транспортную компанию прибыльной.",
+                    "tags": [
+                        {"label": "Java"},
+                        {"label": "JavaFX"},
+                        {"label": "Maven"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Играть",
+                            "href": "https://khayrullo-isomiddinov.itch.io/mini-transport-tycoon-game"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/Transport-Tycoon"
+                        },
+                        {
+                            "label": "Скачать для Windows",
+                            "href": "https://github.com/khayrullo-isomiddinov/Transport-Tycoon/releases/tag/v0.1.0"
+                        }
+                    ]
+                },
+                {
+                    "name": "Polaris LMS",
+                    "description": "Система управления обучением, где преподаватели публикуют задания, студенты сдают работы, и у каждого есть свой личный кабинет. Построена на Laravel.",
+                    "tags": [
+                        {"label": "Laravel 12"},
+                        {"label": "Blade"},
+                        {"label": "Tailwind CSS"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/polarisLMS"
+                        }
+                    ]
+                },
+                {
+                    "name": "Erasmus+ Mobility Portal",
+                    "description": "Действующий портал выбора курсов для студентов программы Erasmus+, приезжающих в Университет Сплита. Развёрнут и активно используется реальными студентами по обмену каждый семестр.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "PHP"},
+                        {"label": "REST API"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Сайт",
+                            "href": "https://unisplit-mobility.onrender.com"
+                        }
+                    ]
+                },
+                {
+                    "name": "Stargate Game",
+                    "description": "Браузерная многопользовательская игра, в которой игроки перемещаются по общей сетке и соревнуются за сбор наибольшего количества обломков. Без фреймворков — только чистый JavaScript.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "HTML"},
+                        {"label": "CSS"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Играть",
+                            "href": "https://khayrullo.com/Stargate-Game/"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/Stargate-Game"
+                        }
+                    ]
+                },
+                {
+                    "name": "Booklovers Hub",
+                    "description": "Социальная платформа для читателей: подписывайтесь на друзей, делитесь книгами, пишите рецензии и собирайте свою личную коллекцию. Построена на Laravel.",
+                    "tags": [
+                        {"label": "Laravel"},
+                        {"label": "MySQL"},
+                        {"label": "Blade"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/booklovers-hub"
+                        }
+                    ]
+                },
+                {
+                    "name": "Comment Remover",
+                    "description": "Опубликованное расширение для VS Code, которое удаляет комментарии из исходного кода на семи языках программирования. Тысячи загрузок в Marketplace.",
+                    "tags": [
+                        {"label": "TypeScript"},
+                        {"label": "VS Code API"},
+                        {"label": "Node.js"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Маркетплейс",
+                            "href": "https://marketplace.visualstudio.com/items?itemName=KhayrulloIsomiddinov.khayrullo-comment-remover"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/comment-remover-vscode-ext"
+                        }
+                    ]
+                },
+                {
+                    "name": "MoodLens",
+                    "description": "AR-приложение, которое распознаёт мимику и интонацию голоса в реальном времени, а затем с помощью ИИ отражает то, что вы чувствуете.",
+                    "tags": [
+                        {"label": "React"},
+                        {"label": "Node.js"},
+                        {"label": "AI / ML APIs"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Демо",
+                            "href": "https://khayrullo-isomiddinov.github.io/mood-lens/"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/mood-lens"
+                        }
+                    ]
+                },
+                {
+                    "name": "CLF-02 Flashcards",
+                    "description": "Приложение с карточками в стиле Anki для подготовки к экзамену AWS CLF-02. Листайте карточки, отслеживайте, что уже знаете, и прорабатывайте пробелы.",
+                    "tags": [
+                        {"label": "JavaScript"},
+                        {"label": "HTML"},
+                        {"label": "CSS"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Демо",
+                            "href": "https://clf-02-flashcards-app.onrender.com/"
+                        },
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov/clf-02-flashcards-app"
+                        }
+                    ]
+                },
+                {
+                    "name": "Knights Game",
+                    "description": "Игра для двух игроков на Java Swing, в которой рыцари ходят шахматными конями, закрашивают клетки по пути и соревнуются, кто первым соберёт четыре в ряд.",
+                    "tags": [
+                        {"label": "Java"},
+                        {"label": "Swing"},
+                        {"label": "OOP"}
+                    ],
+                    "buttons": [
+                        {
+                            "label": "Код",
+                            "href": "https://github.com/khayrullo-isomiddinov"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

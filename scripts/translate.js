@@ -135,7 +135,7 @@ function applyTranslations(html, translations, lang, pagePath) {
 
   // 6. Language selector — bake in page-specific hrefs and aria-current
   html = html.replace(
-    /<a\b([^>]*)\bhref="\/(es\/|fr\/|ca\/|)"([^>]*)>(EN|ES|FR|CAT)<\/a>/g,
+    /<a\b([^>]*)\bhref="\/(es\/|fr\/|ca\/|ru\/|)"([^>]*)>(EN|ES|FR|CAT|RU)<\/a>/g,
     (match, before, rawLang, after, label) => {
       const code = rawLang.replace(/\//g, '') || 'en';
       const href = pagePath === '/'
